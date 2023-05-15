@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DECIMAL, DateTime
-from sqlalchemy import ForeignKey, CheckConstraint
+from sqlalchemy import ForeignKey
 
 from database import Base
 
@@ -17,7 +17,7 @@ class Platform(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False)
-    owner_id = Column(Integer, ForeignKey("owners.id"))
+    owner_id = Column(Integer, ForeignKey("users.id"))
     # Думаю, в случае с типом площадки правильным решением будет
     # определить, какие площадки вообще могут быть и написать
     # под них Enum. Обсудим на созвоне.

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date
+from datetime import datetime
 
 # User and Owner
 class UserBase(BaseModel):
@@ -26,7 +26,7 @@ class PlatformBase(BaseModel):
     square: float
     ceiling_height: float
     closest_station: str
-    price_per_hour: str
+    price_per_hour: float
     info: str
 
 class Platform(PlatformBase):
@@ -40,8 +40,8 @@ class Platform(PlatformBase):
 # Booking
 class BookingBase(BaseModel):
     number_of_persons: int
-    start_date: date
-    end_date: date
+    start_date: datetime
+    end_date: datetime
 
 class Booking(BookingBase):
     id: int
