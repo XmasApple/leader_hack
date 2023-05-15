@@ -39,9 +39,7 @@ class Booking(Base):
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
 
-class Owner(Base):
+class Owner(User):
     __tablename__ = "owners"
     
-    id = Column(Integer, primary_key=True, index=True)
     telephone = Column(String, CheckConstraint("LEN(telephone) = 20"))
-    email = Column(String, unique=True, index=True)
