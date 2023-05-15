@@ -16,8 +16,8 @@ class User(UserBase):
     class Config:
         orm_mode = True
 
-class Owner(User):
-    telephone: str
+"""class Owner(User):
+    telephone: str"""
 
 # Platform
 class PlatformBase(BaseModel):

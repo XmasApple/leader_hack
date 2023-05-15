@@ -46,3 +46,10 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_all_users(db, skip=skip, limit=limit)
     return users
+
+@app.post("/platforms/add/", response_model=schemas.Platform)
+def add_platform(platform: schemas.Platform, db: Session = Depends(get_db)):
+    db_platform = crud.get_platform_by_name(db, platform.name)
+    if db_platform:
+        raise HTTPException(status_code=400, detail="Platform with that name is already registered")
+    

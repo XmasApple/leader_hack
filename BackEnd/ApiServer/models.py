@@ -27,8 +27,6 @@ class Platform(Base):
     closest_station = Column(String)
     price_per_hour = Column(DECIMAL, nullable=False)
     info = Column(String)
-    # TODO: контакты владельца
-    price_per_hour = Column(Integer)
 
 class Booking(Base):
     __tablename__ = "booking"
@@ -39,7 +37,7 @@ class Booking(Base):
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
 
-class Owner(User):
+"""class Owner(User):
     __tablename__ = "owners"
     
-    telephone = Column(String, CheckConstraint("LEN(telephone) = 20"))
+    telephone = Column(String, CheckConstraint("LEN(telephone) = 20"))"""
