@@ -11,6 +11,7 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
 
+
 class Platform(Base):
     # Модель для карточки платформы
     __tablename__ = "platforms"
@@ -28,6 +29,7 @@ class Platform(Base):
     price_per_hour = Column(DECIMAL, nullable=False)
     info = Column(String)
 
+
 class Booking(Base):
     __tablename__ = "booking"
 
@@ -36,6 +38,7 @@ class Booking(Base):
     number_of_persons = Column(Integer)
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
+
 
 """class Owner(User):
     __tablename__ = "owners"
