@@ -1,15 +1,5 @@
-from sqlalchemy import Column, Integer, String, DECIMAL, DateTime
-from sqlalchemy import ForeignKey
-
+from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
 from database import Base
-
-
-class User(Base):
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
 
 
 class Platform(Base):
@@ -28,19 +18,3 @@ class Platform(Base):
     closest_station = Column(String)
     price_per_hour = Column(DECIMAL, nullable=False)
     info = Column(String)
-
-
-class Booking(Base):
-    __tablename__ = "booking"
-
-    id = Column(Integer, primary_key=True, index=True)
-    platform_id = Column(Integer, ForeignKey("platforms.id"))
-    number_of_persons = Column(Integer)
-    start_date = Column(DateTime, nullable=False)
-    end_date = Column(DateTime, nullable=False)
-
-
-"""class Owner(User):
-    __tablename__ = "owners"
-    
-    telephone = Column(String, CheckConstraint("LEN(telephone) = 20"))"""
