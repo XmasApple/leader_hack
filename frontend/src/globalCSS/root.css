@@ -1,0 +1,12 @@
+:root {
+    --bg-color: #0C1622;
+    --text-color: #FFF;
+    --dark-text-color: #000;
+    --first-acent-color: #5005EF;
+    --second-accent-color: #E74362;
+    --third-accent-color: #D9D9D9;
+    --first-acent-color-opacity: rgba(80, 5, 239, 0.55);
+    --platform-card-bg-color: rgba(199, 200, 255, 0.15);
+    --base-font: Cera Pro, sans-serif;
+    --secondary-font: Gilroy, sans-serif;
+}

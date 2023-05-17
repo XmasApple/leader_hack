@@ -1,0 +1,60 @@
+.col_1{
+    flex: 0 0 auto;
+    width: 8.3333333333%;
+}
+
+.col_2{
+    flex: 0 0 auto;
+    width: 16.6666666667%;
+}
+
+.col_3{
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.col_4{
+    flex: 0 0 auto;
+    width: 33.333333333%;
+}
+
+.col_5{
+    flex: 0 0 auto;
+    width: 41.6666666667%;
+}
+
+.col_6{
+    flex: 0 0 auto;
+    width: 50%;
+}
+
+.col_7{
+    flex: 0 0 auto;
+    width: 58.3333333333%;
+}
+
+.col_8{
+    flex: 0 0 auto;
+    width: 66.6666666667%;
+}
+
+.col_9{
+    flex: 0 0 auto;
+    width: 75%;
+}
+
+.col_10{
+    flex: 0 0 auto;
+    width: 83.3333333333%;
+}
+
+.col_11{
+    flex: 0 0 auto;
+    width: 91.6666666667%;
+}
+
+.col_12{
+    flex: 0 0 auto;
+    width: 100%;
+}
+
