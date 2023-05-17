@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class PlatformBase(BaseModel):
     name: str
     type: str

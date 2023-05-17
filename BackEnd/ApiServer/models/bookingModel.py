@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from database import Base
 
+
 class Booking(Base):
     __tablename__ = "booking"
 

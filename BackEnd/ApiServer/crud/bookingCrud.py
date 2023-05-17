@@ -4,6 +4,7 @@ from datetime import datetime
 from models import bookingModel
 from schemas import bookingSchema
 
+
 def get_booking(db: Session, booking_id: int):
     return db.query(bookingModel.Booking).filter(bookingModel.Booking.id == booking_id).first()
 

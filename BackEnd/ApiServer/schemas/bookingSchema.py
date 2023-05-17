@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+
 class BookingBase(BaseModel):
     number_of_persons: int
     start_date: datetime
