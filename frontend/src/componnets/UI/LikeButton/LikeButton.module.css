@@ -1,0 +1,16 @@
+.button {
+    position: absolute;
+}
+
+.button svg {
+    display: block;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.active svg{
+    background-color: var(--second-accent-color);
+    border-radius: 100%;
+    background-clip: content-box;
+}

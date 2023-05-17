@@ -1,0 +1,17 @@
+.row{
+    --bs-indent-x: 1.56vw;
+    --bs-indent-y: 1.56vw;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(var(--bs-indent-x)/-2);
+    margin-right: calc(var(--bs-indent-x)/-2);
+    margin-top: calc(var(--bs-indent-y)*-1);
+}
+
+.row>*{
+    flex-shrink: 0;
+    margin-top: var(--bs-indent-y);
+    max-width: 100%;
+    padding-left: calc(var(--bs-indent-x)/2);
+    padding-right: calc(var(--bs-indent-x)/2);
+}

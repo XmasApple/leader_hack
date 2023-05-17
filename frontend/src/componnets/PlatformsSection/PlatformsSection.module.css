@@ -1,0 +1,139 @@
+.platforms {
+    margin-top: 2.97vw;
+}
+
+.platforms_view_settings {
+    position: relative;
+}
+
+.platforms_controllers {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.platforms_filter {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.platforms_filter span {
+    cursor: pointer;
+    font-size: 0.94vw;
+    line-height: 1.15vw;
+    color: var(--first-acent-color);
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter h2 {
+    margin-left: -0.16vw;
+    font-size: 3.13vw;
+    line-height: 3.91vw;
+}
+
+.filter svg {
+    margin-top: 1.30vw;
+    display: block;
+    width: 1.72vw;
+    height: 1.72vw;
+    margin-left: 1.35vw;
+}
+
+.platforms_search {
+    display: flex;
+}
+
+.search_map_button {
+    margin-right: 1.56vw;
+    padding: 0.83vw 3.13vw;
+    font-size: 0.94vw;
+    color: var(--text-color);
+    line-height: 1.15vw;
+    background-color: var(--first-acent-color);
+    border-radius: 0.36vw;
+}
+
+.search_form {
+    position: relative;
+    width: 42.19vw;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.36vw;
+    padding: 0.83vw 1.56vw 0.83vw 20px;
+    border: 1px solid var(--text-color);
+}
+
+.search_form input {
+    width: 100%;
+    border: none;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 0.94vw;
+}
+
+.search_form input::placeholder {
+    color: var(--text-color);
+}
+
+.search_form input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+.search_form input:focus {
+    outline: none;
+}
+
+.search_form svg {
+    width: 1.72vw;
+    height: 1.72vw;
+}
+
+.platforms_list {
+    margin-top: 4.53vw;
+}
+
+.platforms_map {
+    width: 100%;
+    height: 26.04vw;
+    border-radius: 0.36vw;
+}
+
+.platforms_select {
+    position: absolute;
+    z-index: 2;
+    top: 5.91vw;
+    left: 0;
+    width: 100%;
+    padding: 5.63vw 0;
+    background-color: var(--text-color);
+}
+
+.platforms_select span {
+    position: absolute;
+    top: 1.98vw;
+    right: 2.29vw;
+}
+
+.platforms_select span svg {
+    width: 1.72vw;
+    height: 1.72vw;
+}
+
+.option_button {
+    display: block;
+    color: var(--dark-text-color);
+    font-size: 1.67vw;
+    line-height: 2.08vw;
+    padding: 0.51vw 2vw 0.51vw 5.68vw;
+}
+
+.active {
+    background-color: var(--first-acent-color);
+    color: var(--text-color);
+}

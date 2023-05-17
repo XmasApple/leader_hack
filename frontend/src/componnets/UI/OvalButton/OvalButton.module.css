@@ -1,0 +1,15 @@
+.blue_border {
+    background-color: var(--bg-color);
+    border-radius: 1.46vw;
+    border: 1px solid var(--first-acent-color-opacity);
+    font-size: 0.94vw;
+    color: var(--text-color);
+    padding: 0.89vw 1.04vw;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.blue_border:hover, .active {
+    background: var(--first-acent-color);
+    box-shadow: inset 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
