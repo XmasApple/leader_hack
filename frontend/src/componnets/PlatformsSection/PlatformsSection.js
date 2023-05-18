@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import s from './PlatformsSection.module.css'
 import Container from "../Col/Container/Container";
 import DownArrowSVG from "../svg/DownArrowSVG";
@@ -10,11 +11,21 @@ import Row from "../Col/Row/Row";
 import Col from "../Col/Col/Col";
 import CloseSVG from "../svg/CloseSVG";
 import map from '../../statics/map.jpg'
+import PlatformFilters from "../PlatformFilters/PlatformFilters";
+import RangeInput from "../UI/RangeInput/RangeInput";
+import img from './../../statics/platforms_bg_img.png'
+import {PLATFORMS_ROUTE} from "../../consts";
+
 
 const PlatformsSection = observer(() => {
 
     const {platform} = useContext(Context)
     const {platformType} = useContext(Context)
+    const {eventType} = useContext(Context)
+    const {capacity} = useContext(Context)
+    const {filter} = useContext(Context)
+
+    const navigate = useNavigate()
 
     const [selectActive, setSelectActive] = useState(false)
     const [activeId, setActiveId] = useState(null)
@@ -28,10 +39,10 @@ const PlatformsSection = observer(() => {
         }
     }
 
-    const filter = async (platformTypeId) => {
+    const setFilter = async (platformTypeId) => {
         try {
             setActiveId(parseInt(platformTypeId))
-
+            setTimeout(() => setSelectActive(false), 200)
         } catch (e) {
 
         }
@@ -96,7 +107,7 @@ const PlatformsSection = observer(() => {
                                 {platformType.types.map((type) =>
                                     <button
                                         key={type.id}
-                                        onClick={() => filter(type.id)}
+                                        onClick={() => setFilter(type.id)}
                                         className={activeId === type.id ?
                                             [s.option_button, s.active].join(' ') :
                                             s.option_button}
@@ -108,25 +119,60 @@ const PlatformsSection = observer(() => {
                         </div>
                     }
                 </div>
-                <div className={s.platforms_list}>
+                <div
+                    className={s.platforms_list}>
                     <Row>
-                        <Col colWidth={'col_9'}>
-                            <Row>
-                                {
-                                    mapActive &&
-                                    <Col colWidth={'col_12'}>
-                                        <img className={s.platforms_map} src={map} alt="Карта"/>
-                                    </Col>
-                                }
-                                {platform.platforms.map((platform) =>
-                                    <Col colWidth={'col_4'}>
-                                        <PlatformCard platform={platform}/>
-                                    </Col>
-                                )}
-                            </Row>
+                        <Col
+                            colWidth={'col_9'}>
+                            <div
+                                style={{backgroundImage: `url(${img})`}}
+                                className={s.list_bg}>
+                                <Row>
+                                    {
+                                        mapActive &&
+                                        <Col colWidth={'col_12'}>
+                                            <img className={s.platforms_map} src={map} alt="Карта"/>
+                                        </Col>
+                                    }
+                                    {platform.platforms.map((platform) =>
+                                        <Col key={platform.id} colWidth={'col_4'}>
+                                            <PlatformCard
+                                                onClick={() => navigate(PLATFORMS_ROUTE + '/' + platform.id)}
+                                                platform={platform}/>
+                                        </Col>
+                                    )}
+                                </Row>
+                            </div>
+
                         </Col>
                         <Col colWidth={'col_3'}>
-
+                            <PlatformFilters
+                                title={'Сортировка'}
+                                filters={filter.filters}
+                            />
+                            <PlatformFilters
+                                title={'Тип мероприятия'}
+                                filters={eventType.types}
+                            />
+                            <PlatformFilters
+                                title={'Количество гостей'}
+                                filters={capacity.capacity}
+                            />
+                            <RangeInput
+                                title={'Цена'}
+                                min={'0'}
+                                max={'500 000 р.'}
+                            />
+                            <RangeInput
+                                title={'Площадь помещения'}
+                                min={'0'}
+                                max={'max?'}
+                            />
+                            <RangeInput
+                                title={'Высота потолков'}
+                                min={'0'}
+                                max={'max?'}
+                            />
                         </Col>
                     </Row>
                 </div>

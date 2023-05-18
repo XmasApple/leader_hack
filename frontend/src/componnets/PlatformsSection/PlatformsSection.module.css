@@ -98,6 +98,12 @@
     margin-top: 4.53vw;
 }
 
+.list_bg {
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .platforms_map {
     width: 100%;
     height: 26.04vw;

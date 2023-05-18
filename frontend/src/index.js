@@ -6,6 +6,9 @@ import {UserStore} from "./store/UserStore";
 import {PlatformStore} from "./store/PlatformStore";
 import {NavStore} from "./store/NavStore";
 import {PlatformTypeStore} from "./store/PlatformTypeStore";
+import {EventTypeStore} from "./store/EventTypeStore";
+import {PlatformCapacityStore} from "./store/PlatformCapacityStore";
+import {PlatformFilterStore} from "./store/PlatformFilterStore";
 
 export const Context = createContext(null)
 
@@ -16,6 +19,9 @@ root.render(
         user: new UserStore(),
         platform: new PlatformStore(),
         platformType: new PlatformTypeStore(),
+        eventType: new EventTypeStore(),
+        capacity: new PlatformCapacityStore(),
+        filter: new PlatformFilterStore(),
     }}>
         <App />
     </Context.Provider>

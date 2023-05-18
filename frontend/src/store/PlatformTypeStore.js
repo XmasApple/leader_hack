@@ -21,7 +21,7 @@ export class PlatformTypeStore {
         makeAutoObservable(this)
     }
 
-    setPlatformsTypes(types) {
+    setTypes(types) {
         this._types = types
     }
 

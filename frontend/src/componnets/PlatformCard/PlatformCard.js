@@ -3,15 +3,16 @@ import s from './PlatformCard.module.css'
 import LikeButton from "../UI/LikeButton/LikeButton";
 import Rating from "../UI/Rating/Rating";
 
-const PlatformCard = ({platform}) => {
+const PlatformCard = ({platform, onClick}) => {
 
     return (
-        <div className={s.block}>
+        <div
+            className={s.block}>
             <div className={s.block_img}>
                 <LikeButton/>
-                <img src={platform.image} alt=""/>
+                <img onClick={onClick} src={platform.image} alt=""/>
             </div>
-            <div className={s.block_description}>
+            <div onClick={onClick} className={s.block_description}>
                 <div className={s.description_content}>
                     <h3>{platform.name}</h3>
                     <div className={s.content_specifications}>
