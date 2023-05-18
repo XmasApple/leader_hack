@@ -5,9 +5,9 @@ import s from "./Col.module.css";
 const Col = ({children, colWidth}) => {
 
     return (
-        <dib className={cn({ [s[`${colWidth}`]]: colWidth })}>
+        <div className={cn({ [s[`${colWidth}`]]: colWidth })}>
             {children}
-        </dib>
+        </div>
     );
 }
 

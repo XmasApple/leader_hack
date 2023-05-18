@@ -1,21 +1,12 @@
 import React, {useState} from 'react';
 import s from './OvalButton.module.css'
 
-const OvalButton = ({children}) => {
-
-    const [active, setActive] = useState(false)
-
-    const changeActive = () => {
-        if (active)
-            setActive(false)
-        else
-            setActive(true)
-    }
+const OvalButton = ({children, id, activeId, setActiveId}) => {
 
     return (
         <button
-            onClick={() => changeActive()}
-            className={active ? [s.blue_border, s.active].join(' ') : s.blue_border}>
+            onClick={() => setActiveId(id)}
+            className={activeId === id  ? [s.blue_border, s.active].join(' ') : s.blue_border}>
             {children}
         </button>
     );

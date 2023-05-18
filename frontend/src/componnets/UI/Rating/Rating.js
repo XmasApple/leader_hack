@@ -30,8 +30,8 @@ const Rating = ({rating}) => {
 
     return (
         <div className={s.rating}>
-            {stars.map((Component) =>
-                <Component/>
+            {stars.map((Component,count) =>
+                <Component key={count}/>
             )}
         </div>
     );

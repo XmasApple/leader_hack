@@ -3,7 +3,7 @@ import {
     BUSINESS_ROUTE,
     CONTACTS_ROUTE,
     INDEX_ROUTE,
-    LOGIN_ROUTE,
+    LOGIN_ROUTE, PLATFORMS_ROUTE,
     REGISTRATION_ROUTE
 } from "./consts";
 import Business from "./pages/Business/Business";
@@ -37,7 +37,11 @@ export const publicRoutes = [
         Component: Auth
     },
     {
-        path: Platforms + '/:id',
+        path: PLATFORMS_ROUTE,
+        Component: Platforms
+    },
+    {
+        path: PLATFORMS_ROUTE + '/:id',
         Component: Platforms
     },
     {

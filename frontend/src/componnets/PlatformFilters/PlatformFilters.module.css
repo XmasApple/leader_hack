@@ -1,0 +1,20 @@
+.block {
+    margin-bottom: 2.60vw;
+}
+
+.block h3 {
+    font-size: 1.25vw;
+    font-weight: 700;
+}
+
+.block_filters {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.block_filters button {
+    margin-top: 0.78vw;
+    margin-right: 0.94vw;
+}
+
+

@@ -16,7 +16,7 @@ const Nav = () => {
                 <li className={s.menu_left}><Link to={INDEX_ROUTE}><LogoSVG/></Link></li>
                 <li className={s.menu_right}>
                     <ul className={s.menu_link}>
-                        {nav.topNav.map(({to, name}) =>
+                        {nav.nav.map(({to, name}) =>
                             <li key={to}><Link to={to}>{name}</Link></li>
                         )}
                     </ul>
