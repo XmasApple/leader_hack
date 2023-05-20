@@ -27,9 +27,9 @@
     padding-top: 7.92vw;
 }
 
-.info_documents h3, .info_nav h3 {
+.info_documents h4, .info_nav h4 {
     color: var(--first-acent-color);
-    font-size: 1.25vw;
+    font-size: var(--h4-font-size);
     margin-bottom: 2.24vw;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .info_documents a, .info_nav a {
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
 }
 
 .footer_c {
@@ -50,7 +50,7 @@
 
 .footer_c p, .footer_c a {
     color: var(--text-color);
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
 }
 
 .info_documents a, .info_nav a {

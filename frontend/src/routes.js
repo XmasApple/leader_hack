@@ -21,6 +21,10 @@ export const businessRoutes = [
         path: BUSINESS_ROUTE,
         Component: Business
     },
+    {
+        path: BUSINESS_ROUTE + '/:id',
+        Component: Business
+    },
 ]
 
 export const publicRoutes = [

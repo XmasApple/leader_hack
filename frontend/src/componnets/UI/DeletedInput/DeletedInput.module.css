@@ -1,0 +1,41 @@
+.block {
+    position: relative;
+}
+
+.textarea {
+    padding: 1.25vw 3vw 1.25vw 0.83vw;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    overflow-y: hidden;
+    background: none;
+    color: var(--input-color);
+    font-size: var(--bs-font-size);
+    border: 1px solid var(--input-color);
+    border-radius: var(--border-radius);
+}
+
+.textarea::placeholder {
+    color: var(--input-color)
+}
+
+.textarea:focus {
+    outline: none;
+}
+
+.block button {
+    display: block;
+    position: absolute;
+    right: 0.83vw;
+    top: 1.1vw;
+}
+
+.block svg {
+    display: block;
+    width: 1.54vw;
+    height: 1.54vw;
+}
+
+.block svg path {
+    fill: var(--first-svg-color);
+}

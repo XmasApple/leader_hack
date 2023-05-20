@@ -1,0 +1,19 @@
+.input {
+    padding: 1.25vw 0.83vw;
+    width: 100%;
+    background: none;
+    color: var(--input-color);
+    font-size: var(--bs-font-size);
+    line-height: var(--bs-line-height);
+    border: 1px solid var(--input-color);
+    border-radius: var(--border-radius);
+}
+
+.input::placeholder {
+    color: var(--input-color);
+}
+
+.input:focus {
+    outline: none;
+}
+

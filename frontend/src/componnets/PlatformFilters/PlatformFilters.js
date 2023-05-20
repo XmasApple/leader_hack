@@ -8,7 +8,7 @@ const PlatformFilters = ({title, filters}) => {
 
     return (
         <div className={s.block}>
-            <h3>{title}</h3>
+            <h4>{title}</h4>
             <div className={s.block_filters}>
                 {filters.map((filter) =>
                     <OvalButton

@@ -1,0 +1,14 @@
+.link {
+    color: var(--text-color);
+    font-size: var(--bs-font-size);
+    font-weight: 700;
+    border-radius: var(--border-radius);
+    background: rgba(199, 200, 255, 0.05);
+    padding: 1.20vw 0 1.20vw 1.35vw;
+    width: 100%;
+    text-align: left;
+}
+
+.active {
+    background: rgba(199, 200, 255, 0.15);
+}
