@@ -5,8 +5,9 @@ class UserBase(BaseModel):
     email: str
 
 
-class UserCreate(UserBase):
+class UserAuth(UserBase):
     password: str
+    life_time: int
 
 
 class User(UserBase):

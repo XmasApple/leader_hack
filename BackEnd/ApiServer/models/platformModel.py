@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
 from database import Base
+from models.userModel import User
 
 
 class Platform(Base):
@@ -8,7 +9,7 @@ class Platform(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False)
-    owner_id = Column(Integer, ForeignKey("users.id"))
+    owner_id = Column(Integer, ForeignKey(f"{User.__tablename__}.id"))
     # Думаю, в случае с типом площадки правильным решением будет
     # определить, какие площадки вообще могут быть и написать
     # под них Enum. Обсудим на созвоне.
