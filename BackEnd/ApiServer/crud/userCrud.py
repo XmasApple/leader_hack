@@ -3,11 +3,11 @@ import hashlib
 import time
 
 from sqlalchemy.orm import Session
-from models import userModel, userTokenModel
+from models import userModel, userTokenModel, companyEmployeeModel
 from schemas import userSchema
 
 
-def get_user(db: Session, user_id: int):
+def get_user_by_id(db: Session, user_id: int):
     return db.query(userModel.User).filter(userModel.User.id == user_id).first()
 
 
@@ -79,3 +79,27 @@ def get_user_by_token(db: Session, token: str):
     if db_token:
         return db.query(userModel.User).filter(userModel.User.id == db_token.user_id).first()
     return None
+
+
+def check_user_is_company_employee(db: Session, user_id: int):
+    return db.query(userModel.CompanyEmployee).filter(userModel.CompanyEmployee.user_id == user_id).first() is not None
+
+
+def get_employee(db: Session, user: userModel.User):
+    return db.query(userModel.User, companyEmployeeModel.CompanyEmployee).filter(
+        user.id == companyEmployeeModel.CompanyEmployee.user_id).first()
+
+
+def get_employee_by_token(db: Session, token: str):
+    db_token = db.query(userTokenModel.UserToken).filter(userTokenModel.UserToken.token == token).first()
+    if db_token:
+        return get_employee(db, get_user_by_id(db, db_token.user_id))
+    return None
+
+
+def create_employee(db: Session, user_id: int, company_id: int, job_title: str):
+    db_employee = companyEmployeeModel.CompanyEmployee(user_id=user_id, company_id=company_id, job_title=job_title)
+    db.add(db_employee)
+    db.commit()
+    db.refresh(db_employee)
+    return db_employee

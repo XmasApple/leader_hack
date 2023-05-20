@@ -10,7 +10,7 @@ router = APIRouter(prefix='/platforms')
 
 @router.post("/add/", response_model=platformSchema.Platform)
 def add_platform(platform: platformSchema.PlatformCreate, db: Session = Depends(get_db)):
-    db_user = userCrud.get_user(db, user_id=platform.owner_id)
+    db_user = userCrud.get_user_by_id(db, user_id=platform.owner_id)
     db_platform = platformCrud.get_platform_by_name(db, platform.name)
 
     if db_user is None:

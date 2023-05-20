@@ -10,12 +10,16 @@ class UserAuth(UserBase):
     life_time: int
 
 
+class UserCreate(UserAuth):
+    first_name: str
+    last_name: str
+    middle_name: str
+    phone_number: str
+
+
 class User(UserBase):
     id: int
 
     class Config:
         orm_mode = True
 
-
-"""class Owner(User):
-    telephone: str"""
