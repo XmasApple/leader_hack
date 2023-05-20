@@ -7,6 +7,14 @@
     --third-accent-color: #D9D9D9;
     --first-acent-color-opacity: rgba(80, 5, 239, 0.55);
     --platform-card-bg-color: rgba(199, 200, 255, 0.15);
+    --first-svg-color: #C7C8FF;
+    --input-color: rgba(199, 200, 255, 0.6);
+    --bs-font-size: 0.94vw;
+    --h2-font-size: 3.13vw;
+    --h3-font-size: 1.88vw;
+    --h4-font-size: 1.25vw;
+    --bs-line-height: 1.15vw;
+    --border-radius: 0.36vw;
     --base-font: Cera Pro, sans-serif;
     --secondary-font: Gilroy, sans-serif;
 }

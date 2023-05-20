@@ -17,11 +17,12 @@
 .menu_right {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 66.6%;
 }
 
 .menu_link {
     display: flex;
-    margin-right: 7.5vw;
 }
 
 .menu_link li {
@@ -29,13 +30,18 @@
 }
 
 .menu_link li a {
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
     color: var(--text-color);
 }
 
 .menu_auth {
     display: flex;
     align-items: center;
+}
+
+.is_business_auth svg{
+    width: 3.65vw;
+    height: 3.65vw;
 }
 
 .auth_business {
@@ -49,7 +55,7 @@
     font-size: 0.89vw;
     font-weight: 700;
     text-transform: uppercase;
-    border-radius: 0.36vw;
+    border-radius: var(--border-radius);
 }
 
 .auth_business a{

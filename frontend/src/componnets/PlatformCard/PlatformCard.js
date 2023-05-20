@@ -14,7 +14,7 @@ const PlatformCard = ({platform, onClick}) => {
             </div>
             <div onClick={onClick} className={s.block_description}>
                 <div className={s.description_content}>
-                    <h3>{platform.name}</h3>
+                    <h4>{platform.name}</h4>
                     <div className={s.content_specifications}>
                         <p>{platform.address}</p>
                         <div className={s.specification_items}>

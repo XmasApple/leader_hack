@@ -1,0 +1,37 @@
+.select {
+    position: relative;
+}
+
+.select_button button {
+    padding: 1.25vw 0.83vw;
+    width: 100%;
+    background: none;
+    color: var(--input-color);
+    line-height: var(--bs-line-height);
+    font-size: var(--bs-font-size);
+    border: 1px solid var(--input-color);
+    border-radius: var(--border-radius);
+    text-align: left;
+}
+
+.select_button svg {
+    position: absolute;
+    top: 1.15vw;
+    right: 0.83vw;
+    display: block;
+    width: 1.61vw;
+    height: 1.61vw;
+}
+
+.select_button svg path {
+    fill: var(--input-color)
+}
+
+.select_options {
+    position: absolute;
+    display: none;
+}
+
+.active {
+    display: block;
+}

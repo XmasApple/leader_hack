@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './Nav.module.css'
-import {Link} from "react-router-dom";
-import {INDEX_ROUTE, LOGIN_ROUTE} from "../../consts";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {BUSINESS_ROUTE, INDEX_ROUTE, LOGIN_ROUTE} from "../../consts";
 import LogoSVG from "../svg/LogoSVG";
 import {useContext} from "react";
 import {Context} from "../../index";
+import AvatarSVG from "../svg/AvatarSVG";
 
 const Nav = () => {
 
+    const {pathname} = useLocation()
+
     const {nav} = useContext(Context)
+    const {user} = useContext(Context)
 
     return (
         <nav className={s.nav}>
@@ -20,10 +24,17 @@ const Nav = () => {
                             <li key={to}><Link to={to}>{name}</Link></li>
                         )}
                     </ul>
-                    <ul className={s.menu_auth}>
-                        <li className={s.auth_business}><Link to={LOGIN_ROUTE}>Бизнес-аккаунт</Link></li>
-                        <li className={s.auth_login}><Link to={LOGIN_ROUTE}>Войти</Link></li>
-                    </ul>
+                    {
+                     pathname === BUSINESS_ROUTE ?
+                         <ul className={s.is_business_auth}>
+                             <li><Link to={LOGIN_ROUTE}><AvatarSVG/></Link></li>
+                         </ul>
+                         :
+                         <ul className={s.menu_auth}>
+                             <li className={s.auth_business}><Link to={LOGIN_ROUTE}>Бизнес-аккаунт</Link></li>
+                             <li className={s.auth_login}><Link to={LOGIN_ROUTE}>Войти</Link></li>
+                         </ul>
+                    }
                 </li>
             </ul>
         </nav>

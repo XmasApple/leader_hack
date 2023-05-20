@@ -20,7 +20,7 @@
 
 .platforms_filter span {
     cursor: pointer;
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
     line-height: 1.15vw;
     color: var(--first-acent-color);
 }
@@ -33,7 +33,7 @@
 
 .filter h2 {
     margin-left: -0.16vw;
-    font-size: 3.13vw;
+    font-size: var(--h2-font-size);
     line-height: 3.91vw;
 }
 
@@ -52,11 +52,11 @@
 .search_map_button {
     margin-right: 1.56vw;
     padding: 0.83vw 3.13vw;
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
     color: var(--text-color);
     line-height: 1.15vw;
     background-color: var(--first-acent-color);
-    border-radius: 0.36vw;
+    border-radius: var(--border-radius);
 }
 
 .search_form {
@@ -64,7 +64,7 @@
     width: 42.19vw;
     display: flex;
     justify-content: space-between;
-    border-radius: 0.36vw;
+    border-radius: var(--border-radius);
     padding: 0.83vw 1.56vw 0.83vw 20px;
     border: 1px solid var(--text-color);
 }
@@ -74,7 +74,7 @@
     border: none;
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
 }
 
 .search_form input::placeholder {
@@ -107,7 +107,7 @@
 .platforms_map {
     width: 100%;
     height: 26.04vw;
-    border-radius: 0.36vw;
+    border-radius: var(--border-radius);
 }
 
 .platforms_select {
