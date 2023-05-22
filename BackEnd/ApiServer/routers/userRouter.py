@@ -6,21 +6,21 @@ from sqlalchemy.orm import Session
 
 from crud import userCrud
 from database import get_db
-from schemas import userSchema, userTokenSchema, employeeSchema
+import schemas.all_schemas as schemas
 
 router = APIRouter(prefix='/users', tags=['users'])
 
 auth_scheme = HTTPBearer()
 
 
-@router.get("/", response_model=list[userSchema.User])
+@router.get("/", response_model=list[schemas.User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = userCrud.get_all_users(db, skip=skip, limit=limit)
     return users
 
 
-@router.post("/create/", response_model=userTokenSchema.Token)
-def create_user(user: userSchema.UserAuth, db: Session = Depends(get_db)):
+@router.post("/create/", response_model=schemas.Token)
+def create_user(user: schemas.UserAuth, db: Session = Depends(get_db)):
     db_user = userCrud.get_user_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -30,8 +30,8 @@ def create_user(user: userSchema.UserAuth, db: Session = Depends(get_db)):
     return db_token
 
 
-@router.post("/auth/", response_model=userTokenSchema.Token)
-def auth_user(user: userSchema.UserAuth, db: Session = Depends(get_db), ):
+@router.post("/auth/", response_model=schemas.Token)
+def auth_user(user: schemas.UserAuth, db: Session = Depends(get_db), ):
     if not userCrud.check_user_password(db, user):
         raise HTTPException(status_code=400, detail="Incorrect email or password")
     user_id = userCrud.get_user_id_by_email(db, user.email)
@@ -41,7 +41,7 @@ def auth_user(user: userSchema.UserAuth, db: Session = Depends(get_db), ):
     return db_token
 
 
-@router.get("/me/", response_model=Union[userSchema.User, employeeSchema.Employee])
+@router.get("/me/", response_model=Union[schemas.User, schemas.Employee])
 def read_user_me(token: HTTPAuthorizationCredentials = Depends(auth_scheme), db: Session = Depends(get_db)):
     token = token.credentials
     if not userCrud.check_token(db, token):
@@ -49,7 +49,7 @@ def read_user_me(token: HTTPAuthorizationCredentials = Depends(auth_scheme), db:
     user = userCrud.get_user_by_token(db, token)
     if user is None:
         raise HTTPException(status_code=400, detail="Incorrect token")
-    employee = userCrud.get_employee(db, user.user_id)
+    employee = userCrud.get_employee(db, user)
     if employee:
         return employee
     return user
