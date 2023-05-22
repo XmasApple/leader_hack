@@ -10,7 +10,7 @@ router = APIRouter(prefix='/booking', tags=['booking'])
 
 @router.post("/add/", response_model=bookingSchema.Booking)
 def add_booking(booking: bookingSchema.BookingCreate, db: Session = Depends(get_db)):
-    db_platform = platformCrud.get_platform(db, platform_id=booking.platform_id)
+    db_platform = platformCrud.get_platform_by_id(db, platform_id=booking.platform_id)
     db_booking = bookingCrud.get_booking_by_time(db, platform_id=booking.platform_id,
                                                  start_time=booking.start_date, end_time=booking.end_date)
 
