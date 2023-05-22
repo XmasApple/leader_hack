@@ -4,13 +4,16 @@ from schemas import platformSchema
 
 
 def get_platform(db: Session, platform_id: int):
-    return db.query(platformModel.Platform).filter(platformModel.Platform.id == platform_id).first()
+    return db.query(platformModel.Platform).filter(platformModel.Platform.platform_id == platform_id).first()
+
 
 def get_platform_by_name(db: Session, platform_name: str):
     return db.query(platformModel.Platform).filter(platformModel.Platform.name.contains(platform_name)).first()
 
+
 def get_all_platforms(db: Session, skip: int = 0, limit: int = 100):
     return db.query(platformModel.Platform).offset(skip).limit(limit).all()
+
 
 def create_platform(db: Session, platform: platformSchema.PlatformCreate):
     db_platform = platformModel.Platform()

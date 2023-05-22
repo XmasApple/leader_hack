@@ -10,7 +10,7 @@ class BookingBase(BaseModel):
 
 
 class Booking(BookingBase):
-    id: int
+    booking_id: int
 
     class Config:
         orm_mode = True

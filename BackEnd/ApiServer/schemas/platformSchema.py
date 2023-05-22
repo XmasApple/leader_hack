@@ -13,7 +13,7 @@ class PlatformBase(BaseModel):
 
 
 class Platform(PlatformBase):
-    id: int
+    platform_id: int
 
     class Config:
         orm_mode = True
