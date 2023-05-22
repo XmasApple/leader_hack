@@ -5,7 +5,7 @@ from database import get_db
 from schemas import bookingSchema
 from crud import bookingCrud, platformCrud
 
-router = APIRouter(prefix='/booking')
+router = APIRouter(prefix='/booking', tags=['booking'])
 
 
 @router.post("/add/", response_model=bookingSchema.Booking)

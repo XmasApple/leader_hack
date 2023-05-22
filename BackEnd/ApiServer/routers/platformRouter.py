@@ -5,7 +5,7 @@ from database import get_db
 from schemas import platformSchema
 from crud import platformCrud, userCrud
 
-router = APIRouter(prefix='/platforms')
+router = APIRouter(prefix='/platforms', tags=['platforms'])
 
 
 @router.post("/add/", response_model=platformSchema.Platform)

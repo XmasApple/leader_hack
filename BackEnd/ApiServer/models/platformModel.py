@@ -7,9 +7,9 @@ class Platform(Base):
     # Модель для карточки платформы
     __tablename__ = "platforms"
 
-    id = Column(Integer, primary_key=True, index=True)
+    platform_id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False)
-    owner_id = Column(Integer, ForeignKey(f"{User.__tablename__}.id"))
+    owner_id = Column(Integer, ForeignKey(f"{User.__tablename__}.user_id"))
     # Думаю, в случае с типом площадки правильным решением будет
     # определить, какие площадки вообще могут быть и написать
     # под них Enum. Обсудим на созвоне.

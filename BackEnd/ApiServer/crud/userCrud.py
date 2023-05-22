@@ -3,12 +3,12 @@ import hashlib
 import time
 
 from sqlalchemy.orm import Session
-from models import userModel, userTokenModel, companyEmployeeModel
+from models import userModel, tokenModel, employeeModel
 from schemas import userSchema
 
 
 def get_user_by_id(db: Session, user_id: int):
-    return db.query(userModel.User).filter(userModel.User.id == user_id).first()
+    return db.query(userModel.User).filter(userModel.User.user_id == user_id).first()
 
 
 def get_user_by_email(db: Session, email: str):
@@ -42,7 +42,7 @@ def check_user_password(db: Session, user: userSchema.UserAuth):
 def get_user_id_by_email(db: Session, email: str):
     db_user = get_user_by_email(db, email)
     if db_user:
-        return db_user.id
+        return db_user.user_id
     return None
 
 
@@ -55,7 +55,7 @@ def create_token(db: Session, user_id: int, life_time: int = 0):
         life_time = 3600 * 24 * 7
     # generate random token
     token = secrets.token_hex(32)
-    db_token = userTokenModel.UserToken(token=token, user_id=user_id, expire_date=time.time() + life_time)
+    db_token = tokenModel.Token(token=token, user_id=user_id, expire_date=time.time() + life_time)
     db.add(db_token)
     db.commit()
     db.refresh(db_token)
@@ -64,7 +64,7 @@ def create_token(db: Session, user_id: int, life_time: int = 0):
 
 def check_token(db: Session, token: str):
     print(token)
-    db_token = db.query(userTokenModel.UserToken).filter(userTokenModel.UserToken.token == token).first()
+    db_token = db.query(tokenModel.Token).filter(tokenModel.Token.token == token).first()
     if not db_token:
         return False
     if db_token.expire_date <= time.time():
@@ -75,9 +75,9 @@ def check_token(db: Session, token: str):
 
 
 def get_user_by_token(db: Session, token: str):
-    db_token = db.query(userTokenModel.UserToken).filter(userTokenModel.UserToken.token == token).first()
+    db_token = db.query(tokenModel.Token).filter(tokenModel.Token.token == token).first()
     if db_token:
-        return db.query(userModel.User).filter(userModel.User.id == db_token.user_id).first()
+        return db.query(userModel.User).filter(userModel.User.user_id == db_token.user_id).first()
     return None
 
 
@@ -86,19 +86,23 @@ def check_user_is_company_employee(db: Session, user_id: int):
 
 
 def get_employee(db: Session, user: userModel.User):
-    return db.query(userModel.User, companyEmployeeModel.CompanyEmployee).filter(
-        user.id == companyEmployeeModel.CompanyEmployee.user_id).first()
+    # return db.query(userModel.User, employeeModel.Employee).filter(
+    #     userModel.User.user_id == employeeModel.Employee.user_id).first()
+    return db.query(employeeModel.Employee).filter(employeeModel.Employee.user_id == user.user_id).first()
 
 
 def get_employee_by_token(db: Session, token: str):
-    db_token = db.query(userTokenModel.UserToken).filter(userTokenModel.UserToken.token == token).first()
+    db_token = db.query(tokenModel.Token).filter(tokenModel.Token.token == token).first()
     if db_token:
         return get_employee(db, get_user_by_id(db, db_token.user_id))
     return None
 
 
 def create_employee(db: Session, user_id: int, company_id: int, job_title: str):
-    db_employee = companyEmployeeModel.CompanyEmployee(user_id=user_id, company_id=company_id, job_title=job_title)
+    db_employee = employeeModel.Employee(
+        user_id=user_id,
+        company_id=company_id,
+        job_title=job_title)
     db.add(db_employee)
     db.commit()
     db.refresh(db_employee)
