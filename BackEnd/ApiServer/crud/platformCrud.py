@@ -7,6 +7,13 @@ def get_platform_by_id(db: Session, platform_id: int):
     return db.query(models.Platform).filter(models.Platform.platform_id == platform_id).first()
 
 
+def get_full_platform_by_id(db: Session, platform_id: int):
+    # return db.query(models.Platform).filter(models.Platform.platform_id == platform_id).first()
+    db_platform = db.query(models.Platform).filter(models.Platform.platform_id == platform_id).first()
+    db_images = db.query(models.PlatformImage).filter(models.PlatformImage.platform_id == platform_id).all()
+    return db_platform, db_images
+
+
 def get_platforms_by_name(db: Session, platform_name: str, skip: int = 0, limit: int = 100):
     return db.query(models.Platform).filter(models.Platform.name.contains(platform_name)).offset(skip).limit(
         limit).all()
@@ -36,7 +43,14 @@ def create_platform(db: Session, platform: schemas.PlatformCreate, company_id: i
         main_image=platform.main_image
     )
 
-    images = [models.PlatformImage(image=image, platform_id=db_platform.platform_id) for image in platform.images]
+    db.add(db_platform)
+    db.commit()
+
+    platform_id = db.query(models.Platform).filter(models.Platform.name == platform.name).first().platform_id
+
+    images = [models.PlatformImage(image=image, platform_id=platform_id) for image in platform.images]
+
+    print([image.__dict__ for image in images])
 
     db.add(db_platform)
     db.commit()

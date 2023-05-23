@@ -1,26 +1,5 @@
 from pydantic import BaseModel
-
-
-# class PlatformBase(BaseModel):
-#     name: str
-#     type: str
-#     square: float
-#     ceiling_height: float
-#     closest_station: str
-#     price_per_hour: float
-#     info: str
-#     owner_id: int
-#
-#
-# class Platform(PlatformBase):
-#     platform_id: int
-#
-#     class Config:
-#         orm_mode = True
-#
-#
-# class PlatformCreate(PlatformBase):
-#     pass
+import models.all_models as models
 
 class PlatformBase(BaseModel):
     name: str
@@ -51,3 +30,23 @@ class Platform(PlatformBase):
 
 class PlatformFull(Platform):
     images: list[str] = []
+
+    @staticmethod
+    def from_db_platform_and_images(db_platform: models.Platform, db_images: list[models.PlatformImage]):
+        return PlatformFull(
+            name=db_platform.name,
+            platform_type_id=db_platform.platform_type_id,
+            square=db_platform.square,
+            ceiling_height=db_platform.ceiling_height,
+            closest_station=db_platform.closest_station,
+            people_capacity=db_platform.people_capacity,
+            rent_type=db_platform.rent_type,
+            price_per_time=db_platform.price_per_time,
+            description=db_platform.description,
+            geotag=db_platform.geotag,
+            main_image=db_platform.main_image,
+            platform_id=db_platform.platform_id,
+            company_id=db_platform.company_id,
+            status=db_platform.status,
+            images=[image.image for image in db_images]
+        )
