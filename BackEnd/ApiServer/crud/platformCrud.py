@@ -28,16 +28,13 @@ def create_platform(db: Session, platform: schemas.PlatformCreate, company_id: i
         square=platform.square,
         ceiling_height=platform.ceiling_height,
         closest_station=platform.closest_station,
+        people_capacity=platform.people_capacity,
         rent_type=platform.rent_type,
         price_per_time=platform.price_per_time,
         description=platform.description,
         geotag=platform.geotag,
         main_image=platform.main_image
     )
-    # images = platform.images
-    # for image in images:
-    #
-    print(db_platform.__dict__)
 
     images = [models.PlatformImage(image=image, platform_id=db_platform.platform_id) for image in platform.images]
 

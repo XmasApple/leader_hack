@@ -28,6 +28,7 @@ class PlatformBase(BaseModel):
     square: float
     ceiling_height: float
     closest_station: str = None
+    people_capacity: int
     rent_type: int
     price_per_time: float
     description: str = None
@@ -42,6 +43,7 @@ class PlatformCreate(PlatformBase):
 class Platform(PlatformBase):
     platform_id: int
     company_id: int
+    status: int
 
     class Config:
         orm_mode = True

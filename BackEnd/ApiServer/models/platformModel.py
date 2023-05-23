@@ -20,8 +20,12 @@ class Platform(Base):
     square: Column = Column(DECIMAL)
     ceiling_height: Column = Column(DECIMAL)
     closest_station: Column = Column(String)
+    people_capacity: Column = Column(Integer, nullable=False)
+    # 1 - per hour, 2 - per day
     rent_type: Column = Column(Integer, nullable=False)
     price_per_time: Column = Column(DECIMAL, nullable=False)
     description: Column = Column(String)
     geotag: Column = Column(String)
     main_image: Column = Column(String)
+    status: Column = Column(Integer, nullable=False, default=1)
+

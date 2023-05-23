@@ -70,14 +70,9 @@ def get_all_companies(db, skip, limit):
 
 
 def get_company_by_token(db: Session, token: str):
-    #  = db.query(models.Token, models.Employee, models.Company) \
-    #     .filter(and_(models.Token.user_id == models.Employee.user_id,
-    #                  models.Employee.company_id == models.Company.company_id,
-    #                  models.Token.token == token,
-    #                  )).first()
     db_token, db_employee, db_company = db.query(models.Token, models.Employee, models.Company) \
         .filter(and_(models.Token.user_id == models.Employee.user_id,
                      models.Employee.company_id == models.Company.company_id,
                      models.Token.token == token
                      )).first()
-    return db_token, db_employee, db_company
+    return db_company
