@@ -16,11 +16,7 @@ def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
 
-<<<<<<< HEAD
-def create_user(db: Session, user: userSchema.UserCreate):
-=======
 def create_user(db: Session, user: schemas.UserAuth):
->>>>>>> main
     # use sha256 to hash password
     h = hashlib.sha256()
     h.update(user.password.encode('utf-8'))
@@ -33,11 +29,7 @@ def create_user(db: Session, user: schemas.UserAuth):
     return db_user
 
 
-<<<<<<< HEAD
-def check_user_password(db: Session, user: userSchema.UserCreate):
-=======
 def check_user_password(db: Session, user: schemas.UserAuth):
->>>>>>> main
     db_user = get_user_by_email(db, user.email)
 
     if db_user:
@@ -56,9 +48,6 @@ def get_user_id_by_email(db: Session, email: str):
 
 
 def get_all_users(db: Session, skip: int = 0, limit: int = 100):
-<<<<<<< HEAD
-    return db.query(userModel.User).offset(skip).limit(limit).all()
-=======
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
@@ -115,4 +104,3 @@ def create_employee(db: Session, user_id: int, company_id: int, job_title: str):
     db.commit()
     db.refresh(db_employee)
     return db_employee
->>>>>>> main

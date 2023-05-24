@@ -9,10 +9,8 @@ def get_booking(db: Session, booking_id: int):
     return db.query(models.Booking).filter(models.Booking.booking_id == booking_id).first()
 
 
-
 def get_booking_by_place(db: Session, platform_id: int):
     return db.query(models.Booking).filter(models.Booking.platform_id == platform_id)
-
 
 
 def get_booking_by_time(db: Session, platform_id: int, start_time: datetime, end_time: datetime):
@@ -23,15 +21,6 @@ def get_booking_by_time(db: Session, platform_id: int, start_time: datetime, end
             models.Booking.end_date.between(start_time, end_time)
         )).first()
 
-<<<<<<< HEAD
-
-def get_all_booking(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(bookingModel.Booking).offset(skip).limit(limit).all()
-
-
-def add_booking(db: Session, booking: bookingSchema.BookingCreate):
-    db_booking = bookingModel.Booking()
-=======
 
 def get_all_booking(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Booking).offset(skip).limit(limit).all()
@@ -39,7 +28,6 @@ def get_all_booking(db: Session, skip: int = 0, limit: int = 100):
 
 def add_booking(db: Session, booking: schemas.BookingCreate):
     db_booking = models.Booking()
->>>>>>> main
     db_booking.platform_id = booking.platform_id
     db_booking.number_of_persons = booking.number_of_persons
     db_booking.start_date = booking.start_date

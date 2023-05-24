@@ -1,36 +1,4 @@
 from sqlalchemy.orm import Session
-<<<<<<< HEAD
-from sqlalchemy import and_
-from models import platformModel
-from schemas import platformSchema
-
-
-def get_platform(db: Session, platform_id: int):
-    return db.query(platformModel.Platform).filter(
-        and_(
-            platformModel.Platform.id == platform_id,
-            platformModel.Platform.hidden_by_user == 0,
-            platformModel.Platform.hidden_by_admin == 0
-        )).first()
-
-
-def get_platform_by_name(db: Session, platform_name: str):
-    return db.query(platformModel.Platform).filter(
-        and_(
-            platformModel.Platform.name == platform_name,
-            platformModel.Platform.hidden_by_user == 0,
-            platformModel.Platform.hidden_by_admin == 0
-        )).first()
-
-
-def get_all_platforms(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(platformModel.Platform).filter(
-        and_(
-            platformModel.Platform.hidden_by_user == 0,
-            platformModel.Platform.hidden_by_admin == 0
-        )).limit(limit).all()
-
-=======
 import models.all_models as models
 import schemas.all_schemas as schemas
 
@@ -45,7 +13,6 @@ def get_platform_by_name(db: Session, platform_name: str):
 
 def get_all_platforms(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Platform).offset(skip).limit(limit).all()
->>>>>>> main
 
 
 def create_platform(db: Session, platform: schemas.PlatformCreate):
@@ -65,7 +32,6 @@ def create_platform(db: Session, platform: schemas.PlatformCreate):
     db.commit()
     db.refresh(db_platform)
     return db_platform
-<<<<<<< HEAD
 
 
 # route = ~/platforms/hide-platform/{id}
@@ -80,5 +46,3 @@ def hide_platform_by_admin(db: Session, platform_id: int):
     db_platform = get_platform(db=db, platform_id=platform_id)
     db_platform.hidden_by_admin = 1
     db.commit()
-=======
->>>>>>> main

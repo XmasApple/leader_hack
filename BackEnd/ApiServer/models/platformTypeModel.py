@@ -1,8 +1,5 @@
 from sqlalchemy import Column, Integer, String
 
-<<<<<<< HEAD
-from database import Base
-=======
 from database import Base, SessionLocal
 
 PLATFORM_TYPES = [
@@ -20,16 +17,11 @@ PLATFORM_TYPES = [
     "Студии для креативного производства ",
     "Складские помещения",
 ]
->>>>>>> main
 
 
 class PlatformType(Base):
     __tablename__ = "platform_types"
 
-<<<<<<< HEAD
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-=======
     platform_type_id: Column = Column(Integer, primary_key=True, index=True)
     name: Column = Column(String, unique=True, nullable=False)
 
@@ -44,4 +36,3 @@ class PlatformType(Base):
             db.add_all([PlatformType(name=platform_type) for platform_type in PLATFORM_TYPES])
             db.commit()
         db.close()
->>>>>>> main
