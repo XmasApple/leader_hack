@@ -8,11 +8,21 @@ export class NavStore {
             {to: ABOUT_US_ROUTE, name: 'О нас'},
             {to: CONTACTS_ROUTE, name: 'Контакты'},
         ]
+        this._business = [
+            {id: 1, name: '1. Основная информация'},
+            {id: 2, name: '2. Параметры площадки'},
+            {id: 3, name: '3. Андрес пространства'},
+            {id: 4, name: '4. О владельце'},
+        ]
         makeAutoObservable(this)
     }
 
     get nav() {
         return this._nav
+    }
+
+    get business() {
+        return this._business
     }
 
 

@@ -21,7 +21,7 @@ const Footer = () => {
                     </div>
                     <div className={s.footer_info}>
                         <div className={s.info_nav}>
-                            <h3>навигация</h3>
+                            <h4>навигация</h4>
                             <ul>
                                 {nav.nav.map(({to, name}) =>
                                     <li key={to}><Link to={to}>{name}</Link></li>
@@ -29,7 +29,7 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className={s.info_documents}>
-                            <h3>документы</h3>
+                            <h4>документы</h4>
                             <ul>
                                 <li><Link>Политика конфиденциальности</Link></li>
                                 <li><Link>Пользовательское соглашение</Link></li>

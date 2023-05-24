@@ -4,7 +4,7 @@ import s from './RangeInput.module.css'
 const RangeInput = ({title, min, max}) => {
     return (
         <div className={s.block}>
-            <h3>{title}</h3>
+            <h4>{title}</h4>
             <div>
                 <input type="range" className={s.block_input}/>
                 <span>{min}</span>

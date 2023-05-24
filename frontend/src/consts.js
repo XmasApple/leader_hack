@@ -4,4 +4,5 @@ export const REGISTRATION_ROUTE = '/registration'
 export const PLATFORMS_ROUTE = '/platforms'
 export const ABOUT_US_ROUTE = '/about'
 export const CONTACTS_ROUTE = '/contacts'
+
 export const BUSINESS_ROUTE = '/business'

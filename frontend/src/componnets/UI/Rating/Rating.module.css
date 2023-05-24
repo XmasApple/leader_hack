@@ -7,3 +7,7 @@
     width: 1.25vw;
     height: 1.25vw;
 }
+
+.rating svg path {
+    fill: var(--second-accent-color)
+}

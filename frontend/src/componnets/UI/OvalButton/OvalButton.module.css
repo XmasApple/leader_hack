@@ -2,7 +2,7 @@
     background-color: var(--bg-color);
     border-radius: 1.46vw;
     border: 1px solid var(--first-acent-color-opacity);
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
     color: var(--text-color);
     padding: 0.89vw 1.04vw;
     font-weight: 700;

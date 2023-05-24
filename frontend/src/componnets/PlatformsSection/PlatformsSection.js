@@ -97,7 +97,7 @@ const PlatformsSection = observer(() => {
                             </span>
                             <div>
                                 <button
-                                    onClick={() => filter(0)}
+                                    onClick={() => setFilter(0)}
                                     className={!activeId ?
                                         [s.option_button, s.active].join(' ') :
                                         s.option_button}

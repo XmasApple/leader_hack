@@ -1,0 +1,40 @@
+.input_file {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+
+.input_file_text {
+    padding: 1.25vw 0.83vw;
+    width: 100%;
+    background: none;
+    color: var(--input-color);
+    line-height: var(--bs-line-height);
+    font-size: var(--bs-font-size);
+    border: 1px solid var(--input-color);
+    border-radius: var(--border-radius);
+    text-align: left;
+    float: left;
+}
+
+.input_file input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+.input_file_button {
+    position: absolute;
+    cursor: pointer;
+    top: 1vw;
+    right: 0.83vw;
+}
+
+.input_file_button svg{
+    width: 1.67vw;
+    height: 1.67vw;
+}

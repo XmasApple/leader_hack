@@ -1,6 +1,6 @@
 .block {
     background-color: var(--platform-card-bg-color);
-    border-radius: 0.36vw;
+    border-radius: var(--border-radius);
     width: 100%;
     height: 26.04vw;
     cursor: pointer;
@@ -15,14 +15,14 @@
     height: 13.80vw;
     background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 0.36vw 0.36vw 0.16vw 0.16vw;
+    border-radius: var(--border-radius) var(--border-radius) 0.16vw 0.16vw;
 }
 
 .block_img button {
     top: 0.52vw;
     left: 0.52vw;
-    width: 1.56vw;
-    height: 1.56vw;
+    width: 1.98vw;
+    height: 1.98vw;
 }
 
 .block_description {
@@ -34,11 +34,11 @@
     height: 9.05vw;
 }
 
-.description_content h3 {
+.description_content h4 {
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 1.25vw;
+    font-size: var(--h4-font-size);
 }
 
 .content_specifications {
@@ -46,7 +46,7 @@
     width: 100%;
     left: 0;
     bottom: 0;
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
     line-height: 1.4vw;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .content_info p {
-    font-size: 0.94vw;
+    font-size: var(--bs-font-size);
     line-height: 1.32vw;
 }
 
