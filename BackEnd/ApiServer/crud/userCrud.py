@@ -8,8 +8,10 @@ from schemas import userSchema
 def get_user(db: Session, user_id: int):
     return db.query(userModel.User).filter(userModel.User.id == user_id).first()
 
+
 def get_user_by_email(db: Session, email: str):
     return db.query(userModel.User).filter(userModel.User.email == email).first()
+
 
 def create_user(db: Session, user: userSchema.UserCreate):
     # use sha256 to hash password
@@ -23,8 +25,9 @@ def create_user(db: Session, user: userSchema.UserCreate):
     db.refresh(db_user)
     return db_user
 
-def check_user_password(self, db: Session, user: userSchema.UserCreate):
-    db_user = self.get_user_by_email(db, user.email)
+
+def check_user_password(db: Session, user: userSchema.UserCreate):
+    db_user = get_user_by_email(db, user.email)
 
     if db_user:
         h = hashlib.sha256()
@@ -33,11 +36,13 @@ def check_user_password(self, db: Session, user: userSchema.UserCreate):
         return db_user.hashed_password == hashed_password
     return False
 
-def get_user_id_by_email(self, db: Session, email: str):
-    db_user = self.get_user_by_email(db, email)
+
+def get_user_id_by_email(db: Session, email: str):
+    db_user = get_user_by_email(db, email)
     if db_user:
         return db_user.id
     return None
+
 
 def get_all_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(userModel.User).offset(skip).limit(limit).all()

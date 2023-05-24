@@ -10,6 +10,7 @@ class PlatformBase(BaseModel):
     price_per_hour: float
     info: str
     owner_id: int
+    hidden_by_user: int
 
 
 class Platform(PlatformBase):
@@ -20,4 +21,4 @@ class Platform(PlatformBase):
 
 
 class PlatformCreate(PlatformBase):
-    pass
+    hidden_by_admin: int = 0
