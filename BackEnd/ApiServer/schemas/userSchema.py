@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -7,7 +9,7 @@ class UserBase(BaseModel):
 
 class UserAuth(UserBase):
     password: str
-    life_time: int
+    life_time: Optional[int] = 0
 
 
 class UserCreate(UserAuth):
