@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  postgres:
+    build:
+      context: ./BackEnd/SQLServer
+      dockerfile: Dockerfile_postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+
+  fastapi:
+    build:
+      context: ./BackEnd/ApiServer
+      dockerfile: Dockerfile_fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    networks:
+      - postgres
+
+  react:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile_react
+    ports:
+      - "3000:3000"
+
+networks:
+  postgres:
+    driver: bridge
