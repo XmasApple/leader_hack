@@ -67,3 +67,12 @@ def get_company_by_owner_token(db: Session, token: str):
 
 def get_all_companies(db, skip, limit):
     return db.query(models.Company).offset(skip).limit(limit).all()
+
+
+def get_company_by_token(db: Session, token: str):
+    db_token, db_employee, db_company = db.query(models.Token, models.Employee, models.Company) \
+        .filter(and_(models.Token.user_id == models.Employee.user_id,
+                     models.Employee.company_id == models.Company.company_id,
+                     models.Token.token == token
+                     )).first()
+    return db_company
