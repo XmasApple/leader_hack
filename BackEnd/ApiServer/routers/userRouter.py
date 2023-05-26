@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
-from crud import userCrud
+from crud import userCrud, adminCrud
 from database import get_db
 import schemas.all_schemas as schemas
 
@@ -41,7 +41,7 @@ def auth_user(user: schemas.UserAuth, db: Session = Depends(get_db), ):
     return db_token
 
 
-@router.get("/me/", response_model=Union[schemas.User, schemas.Employee])
+@router.get("/me/", response_model=Union[schemas.User, schemas.Employee, schemas.Admin])
 def read_user_me(token: HTTPAuthorizationCredentials = Depends(auth_scheme), db: Session = Depends(get_db)):
     token = token.credentials
     if not userCrud.check_token(db, token):
@@ -49,6 +49,9 @@ def read_user_me(token: HTTPAuthorizationCredentials = Depends(auth_scheme), db:
     user = userCrud.get_user_by_token(db, token)
     if user is None:
         raise HTTPException(status_code=400, detail="Incorrect token")
+    admin = adminCrud.get_admin_by_user(db, user)
+    if admin:
+        return admin
     employee = userCrud.get_employee(db, user)
     if employee:
         return employee

@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from database import Base
-from models.platformModel import Platform
 
 from models.platformModel import Platform
 

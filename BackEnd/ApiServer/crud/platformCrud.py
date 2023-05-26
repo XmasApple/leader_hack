@@ -41,8 +41,3 @@ def hide_platform_by_user(db: Session, platform_id: int):
     db.commit()
 
 
-# route = ~/admin/hide-platform/{id}
-def hide_platform_by_admin(db: Session, platform_id: int):
-    db_platform = get_platform(db=db, platform_id=platform_id)
-    db_platform.hidden_by_admin = 1
-    db.commit()

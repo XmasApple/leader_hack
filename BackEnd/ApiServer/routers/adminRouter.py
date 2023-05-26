@@ -4,10 +4,10 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 
 from database import get_db
-from schemas import adminSchema, platformSchema
-from crud import adminCrud, platformCrud
+from schemas import adminSchema, tokenSchema
+from crud import adminCrud, platformCrud, userCrud
 
-router = APIRouter(prefix="/admin")
+router = APIRouter(prefix="/admin", tags=['admin'])
 
 
 @router.post("/add/", response_model=adminSchema.Admin)
@@ -31,5 +31,15 @@ def hide_platform(platform_id: int, db: Session = Depends(get_db)):
     db_platform = platformCrud.get_platform(db=db, platform_id=platform_id)
     if db_platform is None:
         raise HTTPException(status_code=400, detail="Platform does not exist")
-    platformCrud.hide_platform_by_admin(db=db, platform_id=platform_id)
+    adminCrud.hide_platform(db=db, platform_id=platform_id)
     return http.client.OK
+
+
+@router.put("/change-password/")
+def change_password(token: tokenSchema.Token, db: Session = Depends(get_db)):
+    # Починить
+    db_user = userCrud.get_user_by_token(db=db, token=token)
+    if db_user is None:
+        raise HTTPException(status_code=400, detail="User does not exist")
+    return adminCrud.change_user_password(db=db, user=db_user)
+
