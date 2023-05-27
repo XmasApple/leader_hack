@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 import models.all_models as models
 
+
 class PlatformBase(BaseModel):
     name: str
     platform_type_id: int

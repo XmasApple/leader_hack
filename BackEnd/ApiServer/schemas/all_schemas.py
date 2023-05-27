@@ -5,3 +5,4 @@ from schemas.platformSchema import Platform, PlatformCreate, PlatformBase, Platf
 from schemas.platformTypeSchema import PlatformType
 from schemas.tokenSchema import Token
 from schemas.userSchema import User, UserAuth, UserCreate, UserBase
+from schemas.adminSchema import Admin, AdminBase, AdminCreate

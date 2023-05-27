@@ -2,6 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import Column, Integer, DateTime, ForeignKey, CheckConstraint, String
 from database import Base
+
 from models.platformModel import Platform
 from models.userModel import User
 
