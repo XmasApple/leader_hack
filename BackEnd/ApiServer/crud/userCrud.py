@@ -108,3 +108,31 @@ def create_employee(db: Session, user_id: int, company_id: int, job_title: str):
     db.commit()
     db.refresh(db_employee)
     return db_employee
+
+
+# def change_user_password(db: Session, user: models.User):
+#     remove_tokens(db=db, user_id=user.user_id)
+#     h = hashlib.sha256()
+#     h.update(user.password.encode('utf-8'))
+#     hashed_password = h.hexdigest()
+#     user.hashed_password = hashed_password
+#     db.commit()
+#
+#     return http.client.OK
+
+def change_user_password(db: Session, user: models.User, new_password: str):
+    # Delete all tokens
+    db.query(models.Token).filter(models.Token.user_id == user.user_id).delete()
+    db.commit()
+
+    # Change password
+
+    h = hashlib.sha256()
+    h.update(new_password.encode('utf-8'))
+    hashed_password = h.hexdigest()
+    user.hashed_password = hashed_password
+    db.commit()
+
+    db_token = create_token(db, user.user_id, 0)
+
+    return db_token

@@ -50,7 +50,8 @@ def auth_user(user: schemas.UserAuth, db: Session = Depends(get_db), ):
 
 
 @router.get("/me/", response_model=Union[schemas.User, schemas.Employee, schemas.Admin])
-def read_user_me(token: HTTPAuthorizationCredentials = Depends(auth_scheme), db: Session = Depends(get_db)):
+def read_user_me(token: HTTPAuthorizationCredentials = Depends(auth_scheme),
+                 db: Session = Depends(get_db)):
     token = token.credentials
     if not userCrud.check_token(db, token):
         raise HTTPException(status_code=400, detail="Incorrect token")
@@ -64,3 +65,16 @@ def read_user_me(token: HTTPAuthorizationCredentials = Depends(auth_scheme), db:
     if employee:
         return employee
     return user
+
+
+@router.post("/change-password/", response_model=schemas.Token)
+def change_password(user: schemas.UserAuth,
+                    db: Session = Depends(get_db),
+                    token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+
+    token = token.credentials
+    db_user = userCrud.get_user_by_token(db=db, token=token)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found or incorrect token")
+
+    return userCrud.change_user_password(db=db, user=db_user, new_password=user.password)

@@ -1,6 +1,6 @@
-import hashlib
 import http.client
 
+from sqlalchemy import and_
 from sqlalchemy.orm import Session
 
 import models.all_models as models
@@ -18,7 +18,19 @@ def add_admin(db: Session, admin: schemas.AdminCreate):
 
 
 def get_admin(db: Session, admin_id: int):
-    return db.query(models.Admin).filter(models.Admin.id == admin_id).first()
+    return db.query(models.Admin).filter(models.Admin.admin_id == admin_id).first()
+
+
+def get_admin_by_token(db: Session, token: str):
+    db_query = db.query(models.Admin, models.Token).filter(
+        and_(
+            models.Admin.user_id == models.Token.user_id,
+            models.Token.token == token
+        )).first()
+    if db_query is None:
+        return None
+    db_admin, db_token = db_query
+    return db_admin
 
 
 def get_admin_by_user_id(db: Session, user_id: int):
@@ -37,14 +49,18 @@ def remove_admin(db: Session, admin_id: int):
     return db_admin
 
 
-def hide_platform(db: Session, platform_id: int):
-    db_platform = platformCrud.get_platform(db=db, platform_id=platform_id)
-    db_platform.hidden_by_admin = 1
+def set_platform_hide(db: Session, platform_id: int, hide: bool):
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id)
+    if db_platform is None:
+        return None
+    db_platform.hidden_by_admin = int(hide)
     db.commit()
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id)
+    return db_platform
 
 
 def delete_platform(db: Session, platform_id: int):
-    db_platform = platformCrud.get_platform(db=db, platform_id=platform_id)
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id)
 
     db.delete(db_platform)
     db.commit()
@@ -67,17 +83,6 @@ def delete_user(db: Session, user_id: int):
     return db_user
 
 
-def change_user_password(db: Session, user: models.User):
-    remove_tokens(db=db, user_id=user.user_id)
-    h = hashlib.sha256()
-    h.update(user.password.encode('utf-8'))
-    hashed_password = h.hexdigest()
-    user.hashed_password = hashed_password
-    db.commit()
-
-    return http.client.OK
-
-
 def remove_tokens(db: Session, user_id: int):
     tokens: list = db.query(models.Token).filter(models.Token.user_id == user_id).all()
     for token in tokens:
@@ -85,4 +90,3 @@ def remove_tokens(db: Session, user_id: int):
         db.commit()
 
     return http.client.OK
-

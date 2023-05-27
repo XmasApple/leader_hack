@@ -10,6 +10,7 @@ router = APIRouter(prefix='/platforms', tags=['platforms'])
 
 auth_scheme = HTTPBearer()
 
+
 @router.get("/", response_model=list[schemas.Platform])
 def read_platforms(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     platforms = platformCrud.get_all_platforms(db, skip=skip, limit=limit)
@@ -31,19 +32,11 @@ def read_platform_by_name(name: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Platform not found")
     return db_platform
 
+
 @router.get("/types/", response_model=list[schemas.PlatformType])
 def read_platform_types(db: Session = Depends(get_db)):
     platforms = platformCrud.get_platform_types(db)
     return platforms
-
-
-@router.put("/hide-platform/{platform_id}", status_code=200)
-def hide_platform(platform_id: int, db: Session = Depends(get_db)):
-    db_platform = platformCrud.get_platform(db=db, platform_id=platform_id)
-    if db_platform is None:
-        raise HTTPException(status_code=400, detail="Platform does not exist")
-    platformCrud.hide_platform_by_user(db=db, platform_id=platform_id)
-    return "Ok"
 
 
 @router.post("/create/", response_model=schemas.PlatformFull)
@@ -58,3 +51,32 @@ def create_platform(platform: schemas.PlatformCreate,
 
     platform = schemas.PlatformFull.from_db_platform_and_images(db_platform, db_images)
     return platform
+
+
+def set_platform_hide(db: Session, platform_id: int, token: HTTPAuthorizationCredentials, hide: bool):
+    token = token.credentials
+
+    db_company = companyCrud.get_company_by_token(db, token)
+    if db_company is None:
+        raise HTTPException(status_code=400, detail="Incorrect token or company does not exist")
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id)
+    if db_platform is None:
+        raise HTTPException(status_code=400, detail="Platform does not exist")
+    if db_platform.company_id != db_company.company_id:
+        raise HTTPException(status_code=400, detail="Platform does not belong to this company")
+    db_platform = platformCrud.platform_set_hide_by_user(db=db, platform_id=platform_id, hide=hide)
+    return db_platform
+
+
+@router.post("/hide-platform/{platform_id}", response_model=schemas.Platform)
+def hide_platform(platform_id: int,
+                  db: Session = Depends(get_db),
+                  token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    return set_platform_hide(db, platform_id, token, True)
+
+
+@router.post("/unhide-platform/{platform_id}", response_model=schemas.Platform)
+def unhide_platform(platform_id: int,
+                    db: Session = Depends(get_db),
+                    token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    return set_platform_hide(db, platform_id, token, False)

@@ -6,7 +6,7 @@ class AdminBase(BaseModel):
 
 
 class Admin(AdminBase):
-    id: int
+    admin_id: int
 
     class Config:
         orm_mode = True

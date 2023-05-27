@@ -1,45 +1,67 @@
-import http.client
-
 from fastapi import APIRouter, HTTPException, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
+import schemas.all_schemas as schemas
+from crud import adminCrud, userCrud
 from database import get_db
-from schemas import adminSchema, tokenSchema
-from crud import adminCrud, platformCrud, userCrud
 
 router = APIRouter(prefix="/admin", tags=['admin'])
 
+auth_scheme = HTTPBearer()
 
-@router.post("/add/", response_model=adminSchema.Admin)
-def add_admin(admin: adminSchema.AdminCreate, db: Session = Depends(get_db)):
-    if adminCrud.get_admin_by_user_id(db, user_id=admin.user_id) is None:
-        return adminCrud.add_admin(db=db, admin=admin)
-    else:
+
+@router.post("/add/", response_model=schemas.Admin)
+def add_admin(new_admin: schemas.AdminCreate,
+              db: Session = Depends(get_db),
+              token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = token.credentials
+
+    db_admin = adminCrud.get_admin_by_token(db, token)
+    if db_admin is None:
+        raise HTTPException(status_code=400, detail="Incorrect token")
+    db_user = userCrud.get_user_by_id(db, user_id=new_admin.user_id)
+    if db_user is None:
+        raise HTTPException(status_code=400, detail="User does not exist")
+    if adminCrud.get_admin_by_user_id(db, user_id=new_admin.user_id) is not None:
         raise HTTPException(status_code=400, detail="Admin already added")
 
+    return adminCrud.add_admin(db=db, admin=new_admin)
 
-@router.delete("/delete/{admin_id}", response_model=adminSchema.Admin)
-def delete_admin(admin_id: int, db: Session = Depends(get_db)):
-    db_admin = adminCrud.get_admin(db=db, admin_id=admin_id)
+
+@router.delete("/delete/{admin_id}", response_model=schemas.Admin)
+def delete_admin(admin_id: int,
+                 db: Session = Depends(get_db),
+                 token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = token.credentials
+
+    db_admin = adminCrud.get_admin_by_token(db, token)
     if db_admin is None:
-        raise HTTPException(status_code=400, detail="Admin does not exist")
+        raise HTTPException(status_code=400, detail="Incorrect token")
     return adminCrud.remove_admin(db=db, admin_id=admin_id)
 
 
-@router.put("/hide-platform/{platform_id}")
-def hide_platform(platform_id: int, db: Session = Depends(get_db)):
-    db_platform = platformCrud.get_platform(db=db, platform_id=platform_id)
+def set_platform_hide(db: Session, platform_id: int, hide: bool, token: HTTPAuthorizationCredentials):
+    token = token.credentials
+
+    db_admin = adminCrud.get_admin_by_token(db, token)
+    if db_admin is None:
+        raise HTTPException(status_code=400, detail="Incorrect token")
+    db_platform = adminCrud.set_platform_hide(db=db, platform_id=platform_id, hide=hide)
     if db_platform is None:
         raise HTTPException(status_code=400, detail="Platform does not exist")
-    adminCrud.hide_platform(db=db, platform_id=platform_id)
-    return http.client.OK
+    return db_platform
 
 
-@router.put("/change-password/")
-def change_password(token: tokenSchema.Token, db: Session = Depends(get_db)):
-    # Починить
-    db_user = userCrud.get_user_by_token(db=db, token=token)
-    if db_user is None:
-        raise HTTPException(status_code=400, detail="User does not exist")
-    return adminCrud.change_user_password(db=db, user=db_user)
+@router.post("/hide-platform/{platform_id}", response_model=schemas.Platform)
+def hide_platform(platform_id: int,
+                  db: Session = Depends(get_db),
+                  token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    return set_platform_hide(db, platform_id, True, token)
 
+
+@router.post("/unhide-platform/{platform_id}", response_model=schemas.Platform)
+def unhide_platform(platform_id: int,
+                    db: Session = Depends(get_db),
+                    token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    return set_platform_hide(db, platform_id, False, token)
