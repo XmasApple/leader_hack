@@ -88,9 +88,6 @@ def create_booking(db: Session, booking: schemas.BookingCreate, token: str):
     if db_platform is None:
         return "Invalid platform id"
 
-    if db_platform.status != 1:
-        return "Platform not available"
-
     db_collisions = get_booking_collisions(db, booking)
     if db_collisions is not None:
         return "Booking collision"

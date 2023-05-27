@@ -50,12 +50,12 @@ def remove_admin(db: Session, admin_id: int):
 
 
 def set_platform_hide(db: Session, platform_id: int, hide: bool):
-    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id)
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id, hidden_by_admin=not hide)
     if db_platform is None:
         return None
     db_platform.hidden_by_admin = int(hide)
     db.commit()
-    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id)
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id, hidden_by_admin=hide)
     return db_platform
 
 
@@ -68,7 +68,7 @@ def delete_platform(db: Session, platform_id: int):
 
 
 def delete_company(db: Session, company_id: int):
-    db_company = companyCrud.get_company(db=db, company_id=company_id)
+    db_company = companyCrud.get_company_by_id(db=db, company_id=company_id)
 
     db.delete(db_company)
     db.commit()
@@ -90,3 +90,32 @@ def remove_tokens(db: Session, user_id: int):
         db.commit()
 
     return http.client.OK
+
+
+def verify_platform(db: Session, platform_id: int):
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id, is_verified=False)
+    if db_platform is None:
+        return None
+    db_platform.is_verified = 1
+    db.commit()
+    db_platform = platformCrud.get_platform_by_id(db=db, platform_id=platform_id)
+    return db_platform
+
+
+def verify_company(db: Session, company_id: int):
+    db_company = companyCrud.get_company_by_id(db=db, company_id=company_id, is_verified=False)
+    if db_company is None:
+        return None
+    db_company.is_verified = 1
+    db.commit()
+    db_company = companyCrud.get_company_by_id(db=db, company_id=company_id)
+    return db_company
+
+
+def get_unverified_platforms(db: Session):
+    return db.query(models.Platform).filter(models.Platform.is_verified == 0).all()
+
+
+def get_unverified_companies(db: Session):
+    return db.query(models.Company).filter(models.Company.is_verified == 0).all()
+

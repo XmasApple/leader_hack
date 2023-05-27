@@ -85,7 +85,7 @@ def get_user_by_token(db: Session, token: str):
 
 
 def check_user_is_company_employee(db: Session, user_id: int):
-    return db.query(models.CompanyEmployee).filter(models.CompanyEmployee.user_id == user_id).first() is not None
+    return db.query(models.Employee).filter(models.Employee.user_id == user_id).first() is not None
 
 
 def get_employee(db: Session, user: models.User):
@@ -110,22 +110,9 @@ def create_employee(db: Session, user_id: int, company_id: int, job_title: str):
     return db_employee
 
 
-# def change_user_password(db: Session, user: models.User):
-#     remove_tokens(db=db, user_id=user.user_id)
-#     h = hashlib.sha256()
-#     h.update(user.password.encode('utf-8'))
-#     hashed_password = h.hexdigest()
-#     user.hashed_password = hashed_password
-#     db.commit()
-#
-#     return http.client.OK
-
 def change_user_password(db: Session, user: models.User, new_password: str):
-    # Delete all tokens
     db.query(models.Token).filter(models.Token.user_id == user.user_id).delete()
     db.commit()
-
-    # Change password
 
     h = hashlib.sha256()
     h.update(new_password.encode('utf-8'))

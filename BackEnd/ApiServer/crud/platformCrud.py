@@ -1,31 +1,50 @@
+from sqlalchemy import and_
 from sqlalchemy.orm import Session
 
 import models.all_models as models
 import schemas.all_schemas as schemas
 
 
-def get_platform_by_id(db: Session, platform_id: int):
-    return db.query(models.Platform).filter(models.Platform.platform_id == platform_id).first()
+def get_platform_by_id(db: Session, platform_id: int,
+                       hidden_by_admin: bool = False,
+                       hidden_by_user: bool = False,
+                       is_verified: bool = True):
+    return db.query(models.Platform).filter(
+        and_(models.Platform.platform_id == platform_id,
+             models.Platform.hidden_by_admin == int(hidden_by_admin),
+             models.Platform.hidden_by_user == int(hidden_by_user),
+             models.Platform.is_verified == int(is_verified)
+             )).first()
 
 
 def get_full_platform_by_id(db: Session, platform_id: int):
-    # return db.query(models.Platform).filter(models.Platform.platform_id == platform_id).first()
-    db_platform = db.query(models.Platform).filter(models.Platform.platform_id == platform_id).first()
+    db_platform = db.query(models.Platform).filter(
+        and_(models.Platform.platform_id == platform_id,
+             models.Platform.hidden_by_admin == 0,
+             models.Platform.hidden_by_user == 0,
+             models.Platform.is_verified == 1
+             )).first()
+    if db_platform is None:
+        return None, None
     db_images = db.query(models.PlatformImage).filter(models.PlatformImage.platform_id == platform_id).all()
     return db_platform, db_images
 
 
 def get_platforms_by_name(db: Session, platform_name: str, skip: int = 0, limit: int = 100):
-    return db.query(models.Platform).filter(models.Platform.name.contains(platform_name)).offset(skip).limit(
-        limit).all()
-
-
-def get_platform_by_name(db: Session, platform_name: str):
-    return db.query(models.Platform).filter(models.Platform.name.contains(platform_name)).first()
+    return db.query(models.Platform).filter(
+        and_(models.Platform.name.contains(platform_name),
+             models.Platform.hidden_by_admin == 0,
+             models.Platform.hidden_by_user == 0,
+             models.Platform.is_verified == 1
+             )).offset(skip).limit(limit).all()
 
 
 def get_all_platforms(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Platform).offset(skip).limit(limit).all()
+    return db.query(models.Platform).filter(
+        and_(models.Platform.hidden_by_admin == 0,
+             models.Platform.hidden_by_user == 0,
+             models.Platform.is_verified == 1)
+    ).offset(skip).limit(limit).all()
 
 
 def create_platform(db: Session, platform: schemas.PlatformCreate, company_id: int):
@@ -62,7 +81,7 @@ def get_platform_types(db: Session):
 
 
 # route = ~/platforms/hide-platform/{id}
-def platform_set_hide_by_user(db: Session, platform_id: int,  hide: bool):
+def platform_set_hide_by_user(db: Session, platform_id: int, hide: bool):
     db_platform = get_platform_by_id(db=db, platform_id=platform_id)
     if db_platform is None:
         return None

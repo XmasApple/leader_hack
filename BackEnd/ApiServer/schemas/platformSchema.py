@@ -23,7 +23,9 @@ class PlatformCreate(PlatformBase):
 class Platform(PlatformBase):
     platform_id: int
     company_id: int
-    status: int
+    hidden_by_user: int
+    hidden_by_admin: int
+    is_verified: int
 
     class Config:
         orm_mode = True
@@ -48,6 +50,8 @@ class PlatformFull(Platform):
             main_image=db_platform.main_image,
             platform_id=db_platform.platform_id,
             company_id=db_platform.company_id,
-            status=db_platform.status,
-            images=[image.image for image in db_images]
+            images=[image.image for image in db_images],
+            hidden_by_user=db_platform.hidden_by_user,
+            hidden_by_admin=db_platform.hidden_by_admin,
+            is_verified=db_platform.is_verified
         )

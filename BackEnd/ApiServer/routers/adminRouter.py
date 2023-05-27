@@ -53,15 +53,58 @@ def set_platform_hide(db: Session, platform_id: int, hide: bool, token: HTTPAuth
     return db_platform
 
 
-@router.post("/hide-platform/{platform_id}", response_model=schemas.Platform)
+@router.post("/hide_platform/{platform_id}", response_model=schemas.Platform)
 def hide_platform(platform_id: int,
                   db: Session = Depends(get_db),
                   token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
     return set_platform_hide(db, platform_id, True, token)
 
 
-@router.post("/unhide-platform/{platform_id}", response_model=schemas.Platform)
+@router.post("/unhide_platform/{platform_id}", response_model=schemas.Platform)
 def unhide_platform(platform_id: int,
                     db: Session = Depends(get_db),
                     token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
     return set_platform_hide(db, platform_id, False, token)
+
+
+@router.post("/verify_platform/{platform_id}", response_model=schemas.Platform)
+def verify_platform(platform_id: int,
+                    db: Session = Depends(get_db),
+                    token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = token.credentials
+
+    db_admin = adminCrud.get_admin_by_token(db, token)
+    if db_admin is None:
+        raise HTTPException(status_code=400, detail="Incorrect token")
+    db_platform = adminCrud.verify_platform(db=db, platform_id=platform_id)
+    if db_platform is None:
+        raise HTTPException(status_code=400, detail="Platform does not exist")
+
+    return db_platform
+
+
+@router.post("/verify_company/{company_id}", response_model=schemas.Company)
+def verify_company(company_id: int,
+                   db: Session = Depends(get_db),
+                   token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = token.credentials
+
+    db_admin = adminCrud.get_admin_by_token(db, token)
+    if db_admin is None:
+        raise HTTPException(status_code=400, detail="Incorrect token")
+    db_company = adminCrud.verify_company(db=db, company_id=company_id)
+    if db_company is None:
+        raise HTTPException(status_code=400, detail="Company does not exist")
+
+    return db_company
+
+
+@router.get("/get_unverified_platforms/", response_model=list[schemas.Platform])
+def get_unverified_platforms(db: Session = Depends(get_db),
+                             token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = token.credentials
+
+    db_admin = adminCrud.get_admin_by_token(db, token)
+    if db_admin is None:
+        raise HTTPException(status_code=400, detail="Incorrect token")
+    return adminCrud.get_unverified_platforms(db=db)

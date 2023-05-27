@@ -19,7 +19,7 @@ def read_companies(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 
 @router.get("/{company_id}", response_model=schemas.Company)
 def read_company(company_id: int, db: Session = Depends(get_db)):
-    db_company = companyCrud.get_company(db, company_id=company_id)
+    db_company = companyCrud.get_company_by_id(db, company_id=company_id)
     if db_company is None:
         raise HTTPException(status_code=404, detail="Company not found")
     return db_company
@@ -85,3 +85,20 @@ def get_employees(db: Session = Depends(get_db), token: HTTPAuthorizationCredent
             company_id=db_employee.company_id))
 
     return result
+
+
+@router.get("/platforms/", response_model=list[schemas.Platform])
+def get_platforms(db: Session = Depends(get_db), token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = token.credentials
+    db_platforms = companyCrud.get_platforms_by_owner_token(db, token)
+    return db_platforms
+
+
+@router.get("/platforms/{platform_id}", response_model=schemas.PlatformFull)
+def get_platform(platform_id: int, db: Session = Depends(get_db),
+                 token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = token.credentials
+    db_platform = companyCrud.get_platform_by_owner_token(db, token, platform_id)
+    if db_platform is None:
+        raise HTTPException(status_code=404, detail="Platform not found")
+    return db_platform
