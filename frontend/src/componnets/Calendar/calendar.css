@@ -1,0 +1,176 @@
+.reset-btn {
+    padding: 1.15vw 0;
+    margin-bottom: 2vw;
+    border: 0.05vw solid var(--first-acent-color);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    border-top: none;
+    display: flex;
+    justify-content: center;
+}
+
+.reset-btn button {
+    color: var(--first-acent-color);
+    border-bottom: 1px solid var(--first-acent-color);
+    line-height: var(--bs-line-height);
+    font-size: var(--bs-font-size);
+}
+
+.react-calendar__navigation__label__labelText
+    .react-calendar__navigation__label__labelText--from {
+    background: none;
+}
+
+.react-calendar {
+    max-width: 100%;
+    border: 0.05vw solid var(--first-acent-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-family: var(--base-font);
+    font-size: var(--bs-font-size);
+    font-weight: 700;
+}
+
+.react-calendar__viewContainer {
+    padding: 1.67vw;
+}
+
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.react-calendar button {
+    margin: 0;
+    border: 0;
+    outline: none;
+}
+
+.react-calendar button:enabled:hover {
+    cursor: pointer;
+}
+
+.react-calendar__navigation {
+    color: var(--text-color);
+    display: flex;
+    gap: 1.04vw;
+    padding: 1.04vw 1.67vw;
+    border-bottom: 0.05vw solid var(--first-acent-color);
+}
+
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+    display: none;
+}
+
+.react-calendar__navigation__label {
+    order: 0;
+    flex-grow: 0;
+    text-align: left;
+}
+
+.react-calendar__navigation__arrow {
+    color: var(--first-acent-color) !important;
+    font-size: 1.56vw;
+}
+
+.react-calendar__navigation__prev-button {
+    order: 2;
+    color: var(--first-acent-color);
+}
+
+.react-calendar__navigation__next-button {
+    order: 3;
+    color: var(--first-acent-color);
+}
+
+.react-calendar__navigation button {
+    color: var(--text-color);
+}
+
+.react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: var(--bs-font-size);
+    color: var(--first-acent-color);
+    text-transform: none;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    margin-bottom: 1.98vw;
+    text-transform: none;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none;
+}
+
+.react-calendar__month-view__weekdays__weekday::first-letter {
+    text-transform: uppercase;
+}
+
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    font-weight: bold;
+}
+
+.react-calendar__month-view__days__day {
+    width: 2.08vw;
+    height: 2.08vw;
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: #d10000;
+}
+
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+    padding: 2em 0.5em;
+}
+
+.react-calendar__tile {
+    background: none;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.react-calendar__tile:disabled {
+    background-color: rgb(12, 12, 123, 0.8) !important;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background: var(--first-acent-color);
+}
+
+.react-calendar__tile--rangeStart {
+    background: var(--first-acent-color) !important;
+}
+
+.react-calendar__tile--rangeEnd {
+    background: var(--first-acent-color) !important;
+}
+
+.react-calendar__tile--active {
+    background-color: var(--first-acent-color-opacity);
+}
+
+.react-calendar__tile--hasActive {
+    background: var(--first-acent-color);
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: var(--first-acent-color);
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+    background-color: var(--first-acent-color-opacity);
+}

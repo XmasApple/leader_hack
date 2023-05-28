@@ -15,6 +15,7 @@ import PlatformFilters from "../PlatformFilters/PlatformFilters";
 import RangeInput from "../UI/RangeInput/RangeInput";
 import img from './../../statics/platforms_bg_img.png'
 import {PLATFORMS_ROUTE} from "../../consts";
+import Calendar from "../Calendar/Calendar";
 
 
 const PlatformsSection = observer(() => {
@@ -146,6 +147,7 @@ const PlatformsSection = observer(() => {
 
                         </Col>
                         <Col colWidth={'col_3'}>
+                            <Calendar/>
                             <PlatformFilters
                                 title={'Сортировка'}
                                 filters={filter.filters}

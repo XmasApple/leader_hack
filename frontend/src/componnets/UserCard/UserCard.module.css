@@ -1,0 +1,87 @@
+.user_card {
+    background: var(--block-bg);
+    padding: 2.08vw 0 6.3vw;
+}
+
+.user_card h4 {
+    font-size: var(--h4-font-size);
+    font-weight: 700;
+    margin-bottom: 1.98vw;
+    line-height: var(--bs-line-height);
+}
+
+.user_card_form {
+    width: 100%;
+}
+
+.user_card_form label {
+    line-height: var(--bs-line-height);
+}
+
+.user_card_form_caption {
+    line-height: var(--bs-line-height);
+    margin-bottom: 2.08vw;
+    font-size: var(--bs-font-size);
+}
+
+.user_calendar {
+    width: 100%;
+}
+
+.user_calendar_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.user_calendar_header p {
+    color: var(--text-color-opacity);
+    font-weight: 700;
+    line-height: var(--bs-line-height);
+    font-size: var(--bs-font-size);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.73vw;
+    position: relative;
+}
+
+.user_calendar_header p svg {
+    width: 1.25vw;
+    height: 1.25vw;
+}
+
+.user_calendar_header p span {
+    line-height: var(--bs-line-height);
+    font-size: var(--bs-font-size);
+    font-weight: 700;
+    position: absolute;
+    right: 0;
+    top: 1.98vw;
+    text-align: right;
+    display: none;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.user_calendar_header p svg:hover ~ span {
+    display: block;
+}
+
+.user_calendar_header p svg:hover > path {
+    fill-opacity: 0.6;
+}
+
+.user_calendar_cards {
+    display: grid;
+    grid-template-columns: repeat(4, 13.02vw);
+    grid-template-rows: repeat(2, 10.94vw);
+    gap: 1.56vw;
+    margin-top: 1.15vw;
+}
+
+.user_calendar_cards .user_calendar_card:nth-child(2n) {
+    padding-top: 4.43vw;
+}
+
+

@@ -1,14 +1,15 @@
 :root {
-    --bg-color: #0C1622;
-    --text-color: #FFF;
+    --bg-color: #0c1622;
+    --text-color: #fff;
+    --text-color-opacity: rgba(255, 255, 255, 0.3);
+    --block-bg: rgba(199, 200, 255, 0.05);
     --dark-text-color: #000;
-    --first-acent-color: #5005EF;
-    --second-accent-color: #E74362;
-    --third-accent-color: #D9D9D9;
+    --first-acent-color: #5005ef;
+    --second-accent-color: #e74362;
+    --third-accent-color: #d9d9d9;
     --first-acent-color-opacity: rgba(80, 5, 239, 0.55);
     --platform-card-bg-color: rgba(199, 200, 255, 0.15);
-    --block-bg: rgba(199, 200, 255, 0.05);
-    --first-svg-color: #C7C8FF;
+    --first-svg-color: #c7c8ff;
     --input-color: rgba(199, 200, 255, 0.6);
     --bs-font-size: 0.94vw;
     --h2-font-size: 3.13vw;
