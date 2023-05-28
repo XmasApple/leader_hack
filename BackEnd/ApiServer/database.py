@@ -7,7 +7,7 @@ from pydantic import PostgresDsn
 
 POSTGRES_USER = 'postgres'
 POSTGRES_PASSWORD = '1111'
-print(os.environ.values())
+
 if os.environ.get('POSTGRES_SERVER'):
     POSTGRES_SERVER = os.environ.get('POSTGRES_SERVER')
 else:
