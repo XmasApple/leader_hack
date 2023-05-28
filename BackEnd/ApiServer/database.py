@@ -6,8 +6,13 @@ from sqlalchemy.orm import sessionmaker, Session
 from pydantic import PostgresDsn
 
 POSTGRES_USER = 'postgres'
+<<<<<<< HEAD
 POSTGRES_PASSWORD = 'whesoyam1W'
 print(os.environ.values())
+=======
+POSTGRES_PASSWORD = '1111'
+
+>>>>>>> main
 if os.environ.get('POSTGRES_SERVER'):
     POSTGRES_SERVER = os.environ.get('POSTGRES_SERVER')
 else:

@@ -27,7 +27,8 @@ def get_full_platform_by_id(db: Session, platform_id: int):
     if db_platform is None:
         return None, None
     db_images = db.query(models.PlatformImage).filter(models.PlatformImage.platform_id == platform_id).all()
-    return db_platform, db_images
+    db_company = db.query(models.Company).filter(models.Company.company_id == db_platform.company_id).first()
+    return db_platform, db_images, db_company
 
 
 def get_platforms_by_name(db: Session, platform_name: str, skip: int = 0, limit: int = 100):
