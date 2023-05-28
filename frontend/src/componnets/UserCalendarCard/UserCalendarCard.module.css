@@ -1,0 +1,21 @@
+.calendarCard {
+    width: 13.02vw;
+    height: 10.94vw;
+    border-radius: var(--border-radius);
+    background: var(--platform-card-bg-color);
+    padding: 1.04vw;
+}
+
+.calendarCard_date {
+    font-weight: 400;
+    line-height: var(--bs-line-height);
+    font-size: var(--bs-font-size);
+    color: rgba(217, 217, 217, 1);
+    margin-bottom: 1.04vw;
+}
+
+.calendarCard_title {
+    font-weight: 700;
+    line-height: var(--bs-line-height);
+    font-size: var(--bs-font-size);
+}

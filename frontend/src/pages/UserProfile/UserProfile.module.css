@@ -1,0 +1,32 @@
+.user_profile {
+    margin-top: 12.24vw;
+    position: relative;
+}
+
+.user_profile_bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.user_profile_bg img {
+    width: 100%;
+    max-height: 56.25vw;
+}
+
+.user_profile h3 {
+    font-size: var(--h3-font-size);
+    line-height: 2.34vw;
+    font-weight: 700;
+}
+
+.user_profile .user_profile_subTitle {
+    font-size: var(--bs-font-size);
+    line-height: var(--bs-line-height);
+    font-weight: 700;
+    color: var(--text-color-opacity);
+    margin-top: 0.26vw;
+    margin-bottom: 2.08vw;
+}

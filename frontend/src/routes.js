@@ -4,7 +4,7 @@ import {
     CONTACTS_ROUTE,
     INDEX_ROUTE,
     LOGIN_ROUTE, PLATFORMS_ROUTE, REGISTRATION_COMPANY_ROUTE,
-    REGISTRATION_ROUTE
+    REGISTRATION_ROUTE, USER_PROFILE
 } from "./consts";
 import Business from "./pages/Business/Business";
 import Index from "./pages/Index/Index";
@@ -12,6 +12,7 @@ import Auth from "./pages/Auth/Auth";
 import Platforms from "./pages/Platforms/Platforms";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import Contacts from "./pages/Contacts/Contacts";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 
 export const authRoutes = []
@@ -43,6 +44,10 @@ export const publicRoutes = [
     {
         path: REGISTRATION_COMPANY_ROUTE,
         Component: Auth,
+    },
+    {
+        path: USER_PROFILE,
+        Component: UserProfile,
     },
     {
         path: PLATFORMS_ROUTE,

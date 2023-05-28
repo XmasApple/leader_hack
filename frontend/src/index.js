@@ -9,8 +9,10 @@ import {PlatformTypeStore} from "./store/PlatformTypeStore";
 import {EventTypeStore} from "./store/EventTypeStore";
 import {PlatformCapacityStore} from "./store/PlatformCapacityStore";
 import {PlatformFilterStore} from "./store/PlatformFilterStore";
+import axios from "axios";
 
 export const Context = createContext(null)
+axios.defaults.headers.common['Accept'] = 'application/json'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

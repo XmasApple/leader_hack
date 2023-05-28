@@ -7,3 +7,4 @@ export const ABOUT_US_ROUTE = '/about'
 export const CONTACTS_ROUTE = '/contacts'
 
 export const BUSINESS_ROUTE = '/business'
+export const USER_PROFILE = '/user';
