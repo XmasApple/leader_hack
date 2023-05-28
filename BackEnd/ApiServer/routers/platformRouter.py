@@ -19,8 +19,7 @@ def read_platforms(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 
 @router.get("/{platform_id}", response_model=schemas.PlatformFull)
 def read_platform(platform_id: int, db: Session = Depends(get_db)):
-    db_platform, db_images, db_feedbacks, db_company = platformCrud.get_full_platform_by_id(db, platform_id=platform_id)
-    print(f"{db_platform=},\n {db_images=},\n {db_company=}")
+    db_platform, db_images, db_company, db_feedbacks = platformCrud.get_full_platform_by_id(db, platform_id=platform_id)
     if db_platform is None:
         raise HTTPException(status_code=404, detail="Platform not found")
     return schemas.PlatformFull.from_db_platform_and_images(db_platform, db_images, db_company)

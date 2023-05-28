@@ -34,7 +34,7 @@ class Platform(PlatformBase):
 class PlatformFull(Platform):
     images: list[str] = []
     company_phone_number: str = None
-    platform_feedbacks: list[tuple(int, float)] = []
+    platform_feedbacks: list[tuple[int, str]] = []
 
     @staticmethod
     def from_db_platform_and_images(db_platform: models.Platform, db_images: list[models.PlatformImage],

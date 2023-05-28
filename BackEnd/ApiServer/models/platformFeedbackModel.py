@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 
-from database import Base, SessionLocal
-import all_models as models
+import models.all_models as models
+from database import Base
 
 
 class PlatformFeedback(Base):
