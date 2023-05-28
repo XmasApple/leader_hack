@@ -1,0 +1,23 @@
+.form_fields {
+    margin-top: 1.56vw;
+}
+
+.form_fields input {
+    border-color: var(--text-color);
+    padding-left: 1.51vw;
+    color: var(--text-color);
+}
+
+.form_fields input::placeholder {
+    color: var(--text-color);
+    letter-spacing: normal;
+}
+
+.form_fields input[type='password'] {
+    letter-spacing: 0.1vw;
+}
+
+.form_button {
+    width: 21.88vw;
+    margin-top: 2.08vw;
+}

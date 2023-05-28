@@ -135,7 +135,7 @@ const PlatformsSection = observer(() => {
                                         </Col>
                                     }
                                     {platform.platforms.map((platform) =>
-                                        <Col key={platform.id} colWidth={'col_4'}>
+                                        <Col key={platform.platform_id} colWidth={'col_4'}>
                                             <PlatformCard
                                                 onClick={() => navigate(PLATFORMS_ROUTE + '/' + platform.id)}
                                                 platform={platform}/>

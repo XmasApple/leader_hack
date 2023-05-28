@@ -5,7 +5,13 @@ export class UserStore {
         this._isAuth = false
         this._isBusiness = true
         this._isAdmin = false
-        this._user = {}
+        this._user = {
+            first_name: 'Алексей',
+            last_name: 'Петров',
+            patronymic: 'Владимироваич',
+            company: 'The Blueprint Company',
+            LLC: 'ООО «Зе блюпринт компани» #123 '
+        }
         makeAutoObservable(this)
     }
 

@@ -3,6 +3,7 @@
     display: block;
     cursor: pointer;
     width: 100%;
+    height: 3.65vw;
 }
 
 .input_file_text {

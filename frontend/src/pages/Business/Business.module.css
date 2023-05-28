@@ -2,3 +2,18 @@
     display: block;
     margin-top: 7.55vw;;
 }
+
+.blob {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+}
+
+.blob img {
+    width: 84.69vw;
+    height: 70.10vw;
+}
+
+.content {
+    position: relative;
+}

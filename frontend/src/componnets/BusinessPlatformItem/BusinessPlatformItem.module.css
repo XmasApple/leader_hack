@@ -1,0 +1,68 @@
+.block {
+    position: relative;
+    display: block;
+    color: white;
+    width: 100%;
+    height: 14.58vw;
+    background-color: var(--block-bg);
+    border-radius: var(--border-radius);
+    padding: 1.35vw 1.20vw;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content h4 {
+    font-size: var(--h4-font-size);
+    line-height: 1.56vw;
+}
+
+.dot_menu {
+    cursor: pointer;
+}
+
+.dot_menu svg{
+    display: block;
+    width: 0.26vw;
+    height: 0.99vw;
+}
+
+.edit_menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.edit_menu button:first-child {
+    margin-bottom: 0.26vw;
+}
+
+.edit_menu button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.89vw 1.04vw;
+    color: var(--text-color);
+    font-size: var(--bs-font-size);
+    line-height: var(--bs-line-height);
+    background-color: var(--block-bg);
+    border-radius: var(--border-radius);
+}
+
+.edit_menu span {
+    margin-left: 0.89vw;
+}
+
+.edit_menu svg {
+    display: block;
+    width: 1.82vw;
+    height: 1.82vw;
+}
+
+.icon {
+    margin-left: 1.35vw;
+    margin-right: 1.20vw;
+}

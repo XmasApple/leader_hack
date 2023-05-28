@@ -30,8 +30,25 @@
 .select_options {
     position: absolute;
     display: none;
+    z-index: 3;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: var(--bg-color);
+    font-size: var(--bs-font-size);
+    text-transform: capitalize;
+    border: var(--border-radius);
 }
 
 .active {
     display: block;
+}
+
+.select_options li {
+    width: 100%;
+    padding: 1.25vw 0.83vw;
+}
+
+.target {
+    background-color: var(--first-acent-color-opacity);
 }
