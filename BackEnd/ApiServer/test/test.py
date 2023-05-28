@@ -1,3 +1,4 @@
+import base64
 import datetime
 import random
 
@@ -185,6 +186,11 @@ def main():
 
     # test platforms/create
     platform_create_url = host + '/platforms/create/'
+    # load image logo.png as base64
+    logo = None
+    with open('test_logo.png', 'rb') as f:
+        logo = base64.b64encode(f.read()).decode('utf-8')
+
     platform_create_data = {
         "name": generate_random_string(10),
         "platform_type_id": random.choice(platform_types_response)['platform_type_id'],
@@ -196,7 +202,7 @@ def main():
         "price_per_time": random.randint(0, 1000),
         "description": generate_random_string(10),
         "geotag": generate_random_string(10),
-        "main_image": generate_random_string(10),
+        "main_image": logo,
         "images": [generate_random_string(10) for _ in range(random.randint(1, 10))]
     }
     platform_create_response = user1_session.post(platform_create_url, data=json.dumps(platform_create_data)).json()
@@ -221,7 +227,16 @@ def main():
     # Booking tests
     # ====================
 
-    # test bookings/create
+    # test booking/generate_pdf/{platform_id} (returns pdf as bytes)
+
+    generate_pdf_url = host + '/booking/generate_pdf/' + str(platform_create_response['platform_id'])
+    generate_pdf_response = user1_session.get(generate_pdf_url).content
+    print(f'{generate_pdf_response=}')
+
+    with open(f'platform_{platform_create_response["platform_id"]}.pdf', 'wb') as f:
+        f.write(generate_pdf_response)
+
+    # test booking/create
 
     now = datetime.datetime.now()
 
@@ -251,12 +266,12 @@ def main():
     print(f'{booking_create_response=}')
     print(f'{booking_invalid_create_response=}')
 
-    # test bookings/
+    # test booking/
     booking_url = host + '/booking/'
     booking_response = user2_session.get(booking_url).json()
     print(f'{booking_response=}')
 
-    # test bookings/{booking_id}
+    # test booking/{booking_id}
     booking_id_url = host + '/booking/' + str(booking_create_response['booking_id'])
     booking_id_response = user2_session.get(booking_id_url).json()
     print(f'{booking_id_response=}')

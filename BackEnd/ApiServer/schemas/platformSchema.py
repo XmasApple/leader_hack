@@ -13,6 +13,7 @@ class PlatformBase(BaseModel):
     price_per_time: float
     description: str = None
     geotag: str = None
+    address: str = None
     main_image: str = None
 
 
@@ -51,6 +52,7 @@ class PlatformFull(Platform):
             price_per_time=db_platform.price_per_time,
             description=db_platform.description,
             geotag=db_platform.geotag,
+            address=db_platform.address,
             main_image=db_platform.main_image,
             platform_id=db_platform.platform_id,
             company_id=db_platform.company_id,

@@ -29,6 +29,7 @@ class Platform(Base):
     price_per_time: Column = Column(DECIMAL, nullable=False)
     description: Column = Column(String)
     geotag: Column = Column(String)
+    address: Column = Column(String)
     main_image: Column = Column(String)
     hidden_by_user = Column(Integer, nullable=False, default=0)
     hidden_by_admin = Column(Integer, nullable=False, default=0)
