@@ -34,10 +34,12 @@ class Platform(PlatformBase):
 class PlatformFull(Platform):
     images: list[str] = []
     company_phone_number: str = None
+    platform_feedbacks: list[tuple(int, float)] = []
 
     @staticmethod
     def from_db_platform_and_images(db_platform: models.Platform, db_images: list[models.PlatformImage],
-                                    db_company: models.Company):
+                                    db_company: models.Company,
+                                    db_platform_feedbacks: list[models.PlatformFeedback] = []):
         return PlatformFull(
             name=db_platform.name,
             platform_type_id=db_platform.platform_type_id,
@@ -54,6 +56,7 @@ class PlatformFull(Platform):
             company_id=db_platform.company_id,
             company_phone_number=db_company.phone_number,
             images=[image.image for image in db_images],
+            feedbacks=[(db_feedback.rating, db_feedback.feedback) for db_feedback in db_platform_feedbacks],
             hidden_by_user=db_platform.hidden_by_user,
             hidden_by_admin=db_platform.hidden_by_admin,
             is_verified=db_platform.is_verified

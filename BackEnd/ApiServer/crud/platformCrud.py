@@ -28,7 +28,8 @@ def get_full_platform_by_id(db: Session, platform_id: int):
         return None, None
     db_images = db.query(models.PlatformImage).filter(models.PlatformImage.platform_id == platform_id).all()
     db_company = db.query(models.Company).filter(models.Company.company_id == db_platform.company_id).first()
-    return db_platform, db_images, db_company
+    db_feedbacks = get_feedbacks(db=db, platform_id=platform_id)
+    return db_platform, db_images, db_company, db_feedbacks
 
 
 def get_platforms_by_name(db: Session, platform_name: str, skip: int = 0, limit: int = 100):
@@ -94,10 +95,10 @@ def platform_set_hide_by_user(db: Session, platform_id: int, hide: bool):
 
 def add_feedback(db: Session, platform_feedback: schemas.PlatformFeedback):
     db_feedback = models.PlatformFeedback(
-        platform_feedback_id = platform_feedback.platform_feedback_id,
-        platform_id = platform_feedback.platform_id,
-        rating = platform_feedback.rating,
-        feedback = platform_feedback.feedback
+        platform_feedback_id=platform_feedback.platform_feedback_id,
+        platform_id=platform_feedback.platform_id,
+        rating=platform_feedback.rating,
+        feedback=platform_feedback.feedback
     )
     db.add(db_feedback)
     db.commit()
