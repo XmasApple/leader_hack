@@ -33,9 +33,11 @@ class Platform(PlatformBase):
 
 class PlatformFull(Platform):
     images: list[str] = []
+    company_phone_number: str = None
 
     @staticmethod
-    def from_db_platform_and_images(db_platform: models.Platform, db_images: list[models.PlatformImage]):
+    def from_db_platform_and_images(db_platform: models.Platform, db_images: list[models.PlatformImage],
+                                    db_company: models.Company):
         return PlatformFull(
             name=db_platform.name,
             platform_type_id=db_platform.platform_type_id,
@@ -50,6 +52,7 @@ class PlatformFull(Platform):
             main_image=db_platform.main_image,
             platform_id=db_platform.platform_id,
             company_id=db_platform.company_id,
+            company_phone_number=db_company.phone_number,
             images=[image.image for image in db_images],
             hidden_by_user=db_platform.hidden_by_user,
             hidden_by_admin=db_platform.hidden_by_admin,

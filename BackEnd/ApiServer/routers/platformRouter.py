@@ -19,10 +19,11 @@ def read_platforms(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 
 @router.get("/{platform_id}", response_model=schemas.PlatformFull)
 def read_platform(platform_id: int, db: Session = Depends(get_db)):
-    db_platform, db_images = platformCrud.get_full_platform_by_id(db, platform_id=platform_id)
+    db_platform, db_images, db_company = platformCrud.get_full_platform_by_id(db, platform_id=platform_id)
+    print(f"{db_platform=},\n {db_images=},\n {db_company=}")
     if db_platform is None:
         raise HTTPException(status_code=404, detail="Platform not found")
-    return schemas.PlatformFull.from_db_platform_and_images(db_platform, db_images)
+    return schemas.PlatformFull.from_db_platform_and_images(db_platform, db_images, db_company)
 
 
 @router.get("/name/{name}", response_model=list[schemas.Platform])
@@ -49,7 +50,7 @@ def create_platform(platform: schemas.PlatformCreate,
         raise HTTPException(status_code=400, detail="Incorrect token or company does not exist")
     db_platform, db_images = platformCrud.create_platform(db=db, platform=platform, company_id=db_company.company_id)
 
-    platform = schemas.PlatformFull.from_db_platform_and_images(db_platform, db_images)
+    platform = schemas.PlatformFull.from_db_platform_and_images(db_platform, db_images, db_company)
     return platform
 
 
