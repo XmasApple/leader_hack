@@ -13,6 +13,7 @@ const ImageInput = ({name, value, placeholder, onChange}) => {
                 onChange={(e) => onChange(name, e.target.value) }
                 type="file"
                 placeholder={placeholder}
+                multiple
             />
             <span className={s.input_file_button}><AddImgSVG/></span>
         </label>

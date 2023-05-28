@@ -1,0 +1,12 @@
+.section {
+    padding: 2.34vw 0;
+}
+
+.section h3{
+    font-size: var(--h3-font-size);
+}
+
+.section_bg {
+    margin-top: 2.08vw;
+    background: var(--block-bg);
+}

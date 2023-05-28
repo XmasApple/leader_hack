@@ -1,10 +1,10 @@
 import React from 'react';
-import s from './UniversalButton.module.css'
+import s from './UniversalButton.module.css';
 import cn from "classnames";
 
-const UniversalButton = ({children, className, onClick}) => {
+const UniversalButton = ({ onClick, type, children, className }) => {
     return (
-        <button onClick={onClick} className={cn({ [s[`${className}`]]: className })}>
+        <button type={type} onClick={onClick} className={cn({ [s[`${className}`]]: className })}>
             {children}
         </button>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './TextInput.module.css'
 
-const TextInput = ({name, placeholder, value, onChange}) => {
+const TextInput = ({name, placeholder, value, type, onChange}) => {
     return (
         <input
             name={name}
@@ -9,7 +9,7 @@ const TextInput = ({name, placeholder, value, onChange}) => {
             className={s.input}
             value={value}
             onChange={(e) => onChange(name, e.target.value) }
-            type="text"
+            type={type}
             placeholder={placeholder}
         />
     );

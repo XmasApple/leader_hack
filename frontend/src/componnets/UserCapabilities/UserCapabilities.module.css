@@ -1,0 +1,47 @@
+.section {
+    padding-top: 4.69vw;
+}
+
+.title {
+    margin-bottom: 2.08vw;
+    position: relative;
+    display: block;
+    font-size: var(--h2-font-size);
+}
+
+.title svg {
+    width: 1.72vw;
+    height: 1.72vw;
+    transition: .3s;
+}
+
+.active svg {
+    rotate: -180deg;
+}
+
+
+
+.menu {
+    padding-bottom: 2.60vw;
+}
+
+.hide {
+    display: none;
+}
+
+.capability_content span {
+    display: block;
+    margin: 0.78vw 0 1.56vw 0;
+    font-size: var(--bs-font-size);
+    line-height: var(--bs-line-height);
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+}
+
+.capability_content button:first-child {
+    margin-top: 1.56vw;
+}
+
+.capability_content button:not(:first-child) {
+    margin-top: 1.04vw;
+}

@@ -1,0 +1,13 @@
+.block {
+    width: 100%;
+    min-height: 21.2vw;
+    background-color: var(--block-bg);
+    padding: 2.08vw 3.65vw;
+    border-radius: var(--border-radius);
+}
+
+.block h4 {
+    font-size: var(--h4-font-size);
+    line-height: 1.56vw;
+    font-weight: 700;
+}

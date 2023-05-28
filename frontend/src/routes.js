@@ -3,7 +3,7 @@ import {
     BUSINESS_ROUTE,
     CONTACTS_ROUTE,
     INDEX_ROUTE,
-    LOGIN_ROUTE, PLATFORMS_ROUTE,
+    LOGIN_ROUTE, PLATFORMS_ROUTE, REGISTRATION_COMPANY_ROUTE,
     REGISTRATION_ROUTE
 } from "./consts";
 import Business from "./pages/Business/Business";
@@ -39,6 +39,10 @@ export const publicRoutes = [
     {
         path: REGISTRATION_ROUTE,
         Component: Auth
+    },
+    {
+        path: REGISTRATION_COMPANY_ROUTE,
+        Component: Auth,
     },
     {
         path: PLATFORMS_ROUTE,

@@ -14,6 +14,10 @@ export class NavStore {
             {id: 3, name: '3. Андрес пространства'},
             {id: 4, name: '4. О владельце'},
         ]
+        this._info = [
+            {id: 1, name: '1. Основная информация'},
+            {id: 2, name: '2. О владельце'},
+        ]
         makeAutoObservable(this)
     }
 
@@ -23,6 +27,10 @@ export class NavStore {
 
     get business() {
         return this._business
+    }
+
+    get info() {
+        return this._info
     }
 
 

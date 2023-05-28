@@ -1,0 +1,12 @@
+.block {
+    position: relative;
+    display: block;
+    padding: 2.08vw 0 3.59vw 0;
+}
+
+.block p {
+    font-size: var(--bs-font-size);
+    line-height: var(--bs-line-height);
+    color: var(--text-color);
+    margin-bottom: 2.08vw;
+}
