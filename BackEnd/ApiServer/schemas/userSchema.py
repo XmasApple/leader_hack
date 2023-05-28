@@ -12,7 +12,6 @@ class UserAuth(UserBase):
     life_time: Optional[int] = 0
 
 
-
 class UserCreate(UserAuth):
     first_name: str
     last_name: str

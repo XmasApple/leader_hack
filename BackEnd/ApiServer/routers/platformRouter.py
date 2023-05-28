@@ -80,3 +80,4 @@ def unhide_platform(platform_id: int,
                     db: Session = Depends(get_db),
                     token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
     return set_platform_hide(db, platform_id, token, False)
+

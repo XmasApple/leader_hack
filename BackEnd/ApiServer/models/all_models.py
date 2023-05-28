@@ -7,5 +7,6 @@ from models.platformTypeModel import PlatformType
 from models.tokenModel import Token
 from models.userModel import User
 from models.adminModel import Admin
+from models.platformFeedbackModel import PlatformFeedback
 
-models = [Booking, Company, Employee, Platform, PlatformImage, PlatformType, Token, User, Admin]
+models = [Booking, Company, Employee, Platform, PlatformImage, PlatformType, PlatformFeedback, Token, User, Admin]

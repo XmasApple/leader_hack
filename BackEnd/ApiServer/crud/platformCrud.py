@@ -89,3 +89,20 @@ def platform_set_hide_by_user(db: Session, platform_id: int, hide: bool):
     db.commit()
     db.refresh(db_platform)
     return db_platform
+
+
+def add_feedback(db: Session, platform_feedback: schemas.PlatformFeedback):
+    db_feedback = models.PlatformFeedback(
+        platform_feedback_id = platform_feedback.platform_feedback_id,
+        platform_id = platform_feedback.platform_id,
+        rating = platform_feedback.rating,
+        feedback = platform_feedback.feedback
+    )
+    db.add(db_feedback)
+    db.commit()
+    db.refresh(db_feedback)
+    return db_feedback
+
+
+def get_feedbacks(db: Session, platform_id: int):
+    return db.query(models.PlatformFeedback).filter(models.PlatformFeedback.platform_id == platform_id).all()
