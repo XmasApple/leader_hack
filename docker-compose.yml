@@ -20,6 +20,12 @@ services:
       - postgres
     networks:
       - postgres
+  react:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile_react
+    ports:
+      - "3000:3000"
 
 networks:
   postgres:
