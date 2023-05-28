@@ -6,14 +6,18 @@ import Col from "../../Col/Col/Col";
 const CreatePlatformInfo = ({children}) => {
     return (
         <div>
-            <Row style={{justifyContent: 'space-between'}}>
-                <Col colWidth={'col_5'}>
-                    {children[0]}
-                </Col>
-                <Col colWidth={'col_6'}>
-                    {children[1]}
-                </Col>
-            </Row>
+            {children.length > 1 ?
+                <Row style={{justifyContent: 'space-between'}}>
+                    <Col colWidth={'col_5'}>
+                        {children[0]}
+                    </Col>
+                    <Col colWidth={'col_6'}>
+                        {children[1]}
+                    </Col>
+                </Row>
+                :
+                children
+            }
         </div>
     );
 };

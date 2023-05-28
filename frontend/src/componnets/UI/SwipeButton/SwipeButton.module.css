@@ -1,0 +1,15 @@
+.prev, .next {
+    padding: 1.25vw 5.05vw;
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.prev {
+    background-color: rgba(199, 200, 255, 0.6);
+}
+
+.next {
+    background-color: var(--second-accent-color);
+}

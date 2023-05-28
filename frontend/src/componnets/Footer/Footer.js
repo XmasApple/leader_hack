@@ -2,15 +2,18 @@ import React, {useContext} from 'react';
 import s from './Footer.module.css'
 import Container from "../Col/Container/Container";
 import LogoSVG from "../svg/LogoSVG";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {Context} from "../../index";
 import img from './../../statics/footer_bg_img.png'
+import {LOGIN_ROUTE, REGISTRATION_COMPANY_ROUTE, REGISTRATION_ROUTE} from "../../consts";
 
 const Footer = () => {
 
     const {nav} = useContext(Context)
+    const {pathname} = useLocation()
 
     return (
+        !(pathname === LOGIN_ROUTE || pathname === REGISTRATION_ROUTE || pathname === REGISTRATION_COMPANY_ROUTE) &&
         <footer
             style={{backgroundImage: `url(${img})`}}
             className={s.footer}>
